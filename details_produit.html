@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Sérum Éclat Haute Formulation | Skinora</title>
+        
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>       
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+
+    <style>
+        :root {
+            --charcoal: #111111;
+            --pure-white: #ffffff;
+            --font-body: 'Inter', sans-serif;
+            --font-signature: 'Playfair Display', serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            --light-gray-bg: #f4f4f6;
+            --text-muted: #6e6e73;
+            --border-color: #E8E8E8;
+            --accent-pink: #F5E6E1;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: var(--font-body); 
+            background-color: #ffffff; 
+            color: var(--charcoal); 
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden;
+        }
+        
+        /* ── HEADER STABLE UNIQUE ── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            background: var(--pure-white);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            width: 100%;
+            padding: 0 32px;
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 12px; }
+        
+        .menu-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;    
+            border: 1px solid white;
+            color: var(--charcoal);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .menu-btn:hover { background: #e5e5e7; transform: scale(1.05); }
+        .menu-btn svg { width: 18px; height: 18px; stroke-width: 2; }
+
+        .nav-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 22px;
+            border-radius: 100px;
+            background: white;
+            border: 1px solid white;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: var(--transition);
+        }
+        .nav-pill:hover { background: #e5e5e7; }
+
+        .nav-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+            padding: 0 20px;
+        }
+        .logo-sub { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 400; color: var(--text-muted); }
+        .logo-signature { font-family: var(--font-signature); font-style: italic; font-size: 14px; color: var(--charcoal); font-weight: 400; margin-bottom: -2px; }
+        .logo-main { font-size: 22px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; }
+
+        .nav-right { display: flex; justify-content: flex-end; gap: 10px; }
+        
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background:white;
+            border: 1px solid white;
+            color: var(--charcoal);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: var(--transition);
+        }
+        .icon-btn:hover { background: #e5e5e7; transform: scale(1.05); }
+        .icon-btn svg { width: 18px; height: 18px; stroke-width: 1.8; }
+
+        /* ── STRUCTURATION DE LA PAGE DÉTAILS PRODUCT ── */
+        .product-details-container {
+            max-width: 1400px;
+            margin: 140px auto 0;
+            padding: 0 32px;
+        }
+
+        /* BLOC TOP : MOSAÏQUE IMAGES + CONFIGURATEUR D'ACHAT */
+        .main-product-hero {
+            display: grid;
+            grid-template-columns: 120px 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+
+        /* Miniatures verticales à gauche */
+        .vertical-thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .thumb-box {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--light-gray-bg);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .thumb-box.active, .thumb-box:hover {
+            border-color: var(--charcoal);
+        }
+
+        .thumb-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Grande image principale centrale */
+        .primary-image-view {
+            width: 100%;
+            aspect-ratio: 0.95 / 1;
+         background: #F5F5F5;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .primary-image-view img {
+            width: 75%;
+            height: 85%;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        /* Colonne d'achat et options (Droite) */
+        .purchase-configuration {
+            padding-left: 20px;
+        }
+
+        .purchase-configuration h1 {
+            font-size: 32px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+
+        .product-size-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .product-main-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* Sélection des tailles minimaliste de l'inspiration */
+        .size-selector-group {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 35px;
+        }
+
+        .size-option-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--charcoal);
+            cursor: pointer;
+        }
+
+        .size-option-label input[type="radio"] {
+            accent-color: var(--charcoal);
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Boutons d'action côte à côte */
+        .purchase-actions-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 45px;
+        }
+
+        .primary-cart-btn {
+            flex: 1.2;
+            background: var(--charcoal);
+            color: var(--pure-white);
+            border: none;
+            padding: 16px;
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .primary-cart-btn:hover { background: #333; }
+
+        .secondary-wishlist-btn {
+            flex: 1;
+            background: var(--light-gray-bg);
+            color: var(--charcoal);
+            border: none;
+            padding: 16px;
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .secondary-wishlist-btn:hover { background: #e5e5e7; }
+
+        /* Accordéons caractéristiques fins */
+        .spec-accordion-item {
+            border-top: 1px solid var(--border-color);
+        }
+        .spec-accordion-item:last-child {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .spec-accordion-trigger {
+            width: 100%;
+            padding: 18px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--charcoal);
+            cursor: pointer;
+        }
+
+        .spec-accordion-trigger span:last-child {
+            font-size: 16px;
+            font-weight: 300;
+            color: #888;
+        }
+
+        .spec-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .spec-accordion-content p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            padding-bottom: 18px;
+        }
+
+        /* BLOC CONTEXTUEL INTERMÉDIAIRE : TEXTURE + INGRÉDIENTS (FOND GRIS) */
+        .texture-specification-block {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            background: #e3e3e5;
+            padding: 100px 0;
+            margin-bottom: 80px;
+        }
+
+        .texture-inner-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .texture-circle-display {
+            width: 85%;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+            margin: 0 auto;
+        }
+
+        .texture-circle-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Lignes de caractéristiques minimalistes de la macro texture */
+        .texture-details-table {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .texture-row-item {
+            border-bottom: 1px solid rgba(0,0,0,0.12);
+            padding: 24px 0;
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            align-items: start;
+            font-size: 13px;
+        }
+
+        .texture-row-item:last-child {
+            border-bottom: none;
+        }
+
+        .texture-row-item h4 {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            color: var(--charcoal);
+            font-size: 12px;
+        }
+
+        .texture-row-item p {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        /* BLOC INFERIEUR : SUGGESTIONS "YOU MAY LIKE" */
+        .suggestions-carousel-section {
+            margin-bottom: 6rem;
+        }
+
+        .suggestions-carousel-section h2 {
+            font-size: 26px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-bottom: 35px;
+            font-family: var(--font-body);
+        }
+
+        .suggestions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            background-color: white ;
+        }
+
+        .suggestion-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .suggestion-img-box {
+            width: 100%;
+            aspect-ratio: 0.85 / 1;
+            background: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .suggestion-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .suggestion-card:hover .suggestion-img-box img {
+            transform: scale(1.04);
+        }
+
+        .suggestion-card h3 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 4px;
+        }
+
+        .suggestion-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ── RESPONSIVE COMPATIBILITY ── */
+        @media (max-width: 1024px) {
+            .main-product-hero { grid-template-columns: 1fr 1fr; }
+            .vertical-thumbnails { display: none; } /* Caché sur tablette pour privilégier l'image principale */
+            .texture-inner-content { grid-template-columns: 1fr; gap: 40px; }
+            .suggestions-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .logo-main { font-size: 18px; }
+            .logo-signature, .logo-sub { display: none; }
+            .product-details-container { margin-top: 110px; padding: 0 1rem; }
+            .main-product-hero { grid-template-columns: 1fr; gap: 30px; }
+            .purchase-configuration { padding-left: 0; }
+            .purchase-actions-row { flex-direction: column; gap: 10px; }
+            .texture-circle-display { width: 70%; }
+            .texture-row-item { grid-template-columns: 1fr; gap: 8px; padding: 16px 0; }
+            .suggestions-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        }
+
+        /* ── FOOTER VERT INSTITUTIONNEL ── */
+          /* ── FOOTER VERT INSTITUTIONNEL ── */
+         .capsule-footer {
+      background: var(--light-gray-bg);
+      /* Supprime ou commente le border-radius pour qu'il soit bien droit en bas */
+      /* border-radius: 40px; */ 
+      padding: 80px 80px 40px; /* Aligné sur le padding de ton bloc blanc */
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+
+      /* Astuce magique pour sortir du conteneur max-width et prendre 100% de l'écran */
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      
+      /* Optionnel : Supprime la marge arrondie du bas de page si tu veux qu'il colle parfaitement */
+      margin-bottom: -40px; 
+    }
+
+    .footer-top-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-brand {
+      font-family: var(--font-body);
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-statement h2 {
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 1.2;
+      max-width: 500px;
+      letter-spacing: -0.01em;
+    }
+
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      border-top: 1px solid #e5e5e7;
+      padding-top: 40px;
+    }
+
+    .footer-social-column {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+    .footer-social-column a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-social-column a:hover { color: var(--charcoal); }
+
+    .footer-column h5 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-column ul a {
+      font-size: 13.5px;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-column ul a:hover {
+      color: var(--text-muted);
+    }
+    </style>
+</head>
+<body>
+
+    <header id="mainHeader">
+        <nav>
+          <div class="nav-left">
+            <button class="menu-btn" aria-label="Open Menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+            <a href="index.html" class="nav-pill ">Accueil</a>
+        <a href="produit.html" class="nav-pill">Produits</a>
+        <a href="conseils.html" class="nav-pill">Conseils</a>
+        <a href="marques.html" class="nav-pill active">Marques</a>
+          </div>
+
+          <div class="nav-center">
+            <span class="logo-sub">L'Atelier</span>
+            <span class="logo-signature">Botanique de</span>
+            <a href="#" class="logo-main">Skinora</a>
+          </div>
+
+          <div class="nav-right">
+            <button class="icon-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+            <button class="icon-btn" aria-label="Cart">
+            <a href="panier.html" style="color: #111111;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+             </a>
+            </button>
+            <button class="icon-btn" aria-label="Account">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </button>
+          </div>
+        </nav>
+    </header>
+
+    <main class="product-details-container">
+        
+        <section class="main-product-hero">
+            <div class="vertical-thumbnails">
+                <div class="thumb-box active"><img src="Images/Cor3.JPG" alt="Vue 1"></div>
+                <div class="thumb-box"><img src="Images/visage1.jpg" alt="Vue 2"></div>
+                <div class="thumb-box"><img src="Images/texture.jpg" alt="Vue 3"></div>
+            </div>
+
+            <div class="primary-image-view">
+                <img src="Images/Cor3.JPG" id="main-view-target" alt="Sérum Peau Neuve">
+            </div>
+
+            <div class="purchase-configuration">
+                <h1>Face Serum</h1>
+                <p class="product-size-subtitle">30 ml / 50 ml</p>
+                
+                <p class="product-main-description">
+                    This facial serum combines alpha and beta hydroxy acids to exfoliate and rejuvenate the skin. Glycolic acid penetrates deeply to remove dead skin cells for a brighter complexion, while salicylic acid unclogs pores and reduces acne. Enriched with hyaluronic acid for hydration and soothing botanical extracts, it leaves the skin refreshed and revitalized.
+                </p>
+
+                <div class="size-selector-group">
+                    <label class="size-option-label">
+                        <input type="radio" name="size" checked> 30 ml
+                    </label>
+                    <label class="size-option-label">
+                        <input type="radio" name="size"> 50 ml
+                    </label>
+                </div>
+
+                <div class="purchase-actions-row">
+                    <button type="button" class="primary-cart-btn">Add to cart</button>
+                    <button type="button" class="secondary-wishlist-btn">Add to wishlist</button>
+                </div>
+
+                <div class="spec-accordions-block">
+                    <div class="spec-accordion-item">
+                        <button class="spec-accordion-trigger" onclick="toggleSpec(this)">
+                            <span>Functions</span><span>+</span>
+                        </button>
+                        <div class="spec-accordion-content">
+                            <p>Exfolie en douceur, unifie le grain de peau, resserre les pores dilatés et relance le renouvellement cellulaire de l'épiderme.</p>
+                        </div>
+                    </div>
+                    <div class="spec-accordion-item">
+                        <button class="spec-accordion-trigger" onclick="toggleSpec(this)">
+                            <span>Dosage</span><span>+</span>
+                        </button>
+                        <div class="spec-accordion-content">
+                            <p>Appliquer 3 à 4 gouttes chaque soir sur peau propre et sèche, avant votre crème hydratante habituelle.</p>
+                        </div>
+                    </div>
+                    <div class="spec-accordion-item">
+                        <button class="spec-accordion-trigger" onclick="toggleSpec(this)">
+                            <span>Payment &amp; Delivery</span><span>+</span>
+                        </button>
+                        <div class="spec-accordion-content">
+                            <p>Livraison standard offerte. Paiements 100% sécurisés via protocoles bancaires cryptés.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="texture-specification-block">
+            <div class="texture-inner-content">
+                <div class="texture-circle-display">
+                    <img src="Images/texture.jpg" alt="Macro formulation texture close-up">
+                </div>
+                
+                <div class="texture-details-table">
+                    <div class="texture-row-item">
+                        <h4>How to use</h4>
+                        <p>To use this facial serum, start with clean skin. Apply a small amount to your fingertips and gently massage it into your face and neck, avoiding the eye area. For best results, use it in the evening and follow up with a moisturizer.</p>
+                    </div>
+                    <div class="texture-row-item">
+                        <h4>Active Ingredients</h4>
+                        <p>AHAs for exfoliation<br>BHAs to clear pores<br>Glycolic Acid for deep cleansing<br>Salicylic Acid to reduce breakouts<br>Hyaluronic Acid for moisture<br>Soothing Botanicals for refreshment</p>
+                    </div>
+                    <div class="texture-row-item">
+                        <h4>Texture</h4>
+                        <p>Liquid &amp; Light</p>
+                    </div>
+                    <div class="texture-row-item">
+                        <h4>Aroma</h4>
+                        <p>Coconut, Honey, Pineapple</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="suggestions-carousel-section">
+            <h2>You may like</h2>
+            <div class="suggestions-grid">
+                <div class="suggestion-card">
+                    <div class="suggestion-img-box"><img src="Images/B1.jpg" alt="Bubble Bath"></div>
+                    <h3>Bubble bath</h3>
+                    <p>With lavender and aloe</p>
+                </div>
+                <div class="suggestion-card">
+                    <div class="suggestion-img-box"><img src="Images/serumj3.jpg" alt="Aroma oil"></div>
+                    <h3>Aroma oil</h3>
+                    <p>Smell of rum, saffron and almonds</p>
+                </div>
+                <div class="suggestion-card">
+                    <div class="suggestion-img-box"><img src="Images/Cor2.JPG" alt="Hand soap"></div>
+                    <h3>Hand soap</h3>
+                    <p>With a softening and nourishing effect</p>
+                </div>
+                <div class="suggestion-card">
+                    <div class="suggestion-img-box"><img src="Images/B3.jpg" alt="Lip balm"></div>
+                    <h3>Lip balm</h3>
+                    <p>With shea butter</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="capsule-footer">
+      <div class="footer-top-block">
+        <div class="footer-brand">skinora</div>
+        <div class="footer-statement">
+          <h2>It's never too late to start taking care of yourself</h2>
+        </div>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-social-column">
+          <a href="#">instagram</a>
+          <a href="#">pinterest</a>
+        </div>
+        
+        <div class="footer-column">
+          <h5>About</h5>
+          <ul>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Rewards</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Info</h5>
+          <ul>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Sazzle</a></li>
+            <li><a href="#">Refunds</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Other</h5>
+          <ul>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms of Policies</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Logique de déploiement des accordéons caractéristiques
+        function toggleSpec(button) {
+            const content = button.nextElementSibling;
+            const indicator = button.querySelector('span:last-child');
+            const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+            document.querySelectorAll('.spec-accordion-content').forEach(item => item.style.maxHeight = '0px');
+            document.querySelectorAll('.spec-accordion-trigger span:last-child').forEach(ind => ind.innerText = '+');
+
+            if (!isOpen) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                indicator.innerText = '−';
+            } else {
+                content.style.maxHeight = '0px';
+                indicator.innerText = '+';
+            }
+        }
+
+        // Changement d'image principale au clic sur les miniatures
+        const thumbnails = document.querySelectorAll('.thumb-box');
+        const mainView = document.getElementById('main-view-target');
+
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                document.querySelector('.thumb-box.active').classList.remove('active');
+                thumb.classList.add('active');
+                mainView.src = thumb.querySelector('img').src;
+            });
+        });
+    </script>
+</body>
+</html>

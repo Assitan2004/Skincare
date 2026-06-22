@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Conseils de l'Atelier | Skinora</title>
+        
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>       
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+
+    <style>
+        :root {
+            --charcoal: #111111;
+            --pure-white: #ffffff;
+            --font-body: 'Inter', sans-serif;
+            --font-signature: 'Playfair Display', serif;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            --light-gray-bg: #f4f4f6;
+            --text-muted: #6e6e73;
+            --border-color: #E8E8E8;
+            --accent-pink: #F5E6E1;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: var(--font-body); 
+            background-color: #ffffff; 
+            color: var(--charcoal); 
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden;
+        }
+        
+        /* ── HEADER STABLE SÉCURISÉ ── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            background: var(--pure-white);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.015);
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            width: 100%;
+            padding: 0 32px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .menu-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;    
+            border: 1px solid white;
+            color: var(--charcoal);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .menu-btn:hover { background: #e5e5e7; transform: scale(1.05); border-color: var(--charcoal); }
+        .menu-btn svg { width: 18px; height: 18px; stroke-width: 2; }
+
+        .nav-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 22px;
+            border-radius: 100px;
+            background: white;
+            border: 1px solid white;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: var(--transition);
+        }
+        .nav-pill:hover { background: #e5e5e7; }
+        .nav-pill.active {
+            background: #F5E6E1;
+            color: #1A1A1A;
+            border-color: #FDF5F2;
+            font-weight: 500;
+        }
+
+        .nav-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+            padding: 0 20px;
+        }
+        .logo-sub {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .logo-signature {
+            font-family: var(--font-signature);
+            font-style: italic;
+            font-size: 14px;
+            color: var(--charcoal);
+            font-weight: 400;
+            margin-bottom: -2px;
+        }
+        .logo-main {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid white;
+            color: var(--charcoal);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: var(--transition);
+        }
+        .icon-btn:hover { background: #e5e5e7; transform: scale(1.05); }
+        .icon-btn svg { width: 18px; height: 18px; stroke-width: 1.8; }
+
+        /* ── INTERFACE STRUCURALE DU JOURNAL (INSPIRATION IMAGE) ── */
+        .advice-page-wrapper {
+            max-width: 1400px;
+            margin: 140px auto 5rem;
+            padding: 0 2rem;
+        }
+
+        /* SECTION 1 : TRIPLE GALERIE ASYMÉTRIQUE PREMIUM */
+        .inspiration-trio-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr 1fr;
+            gap: 30px;
+            align-items: stretch;
+            margin-bottom: 90px;
+        }
+
+        .trio-col-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-right: 20px;
+        }
+
+        .trio-col-text h1 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            color: var(--charcoal);
+        }
+
+        .trio-box-img {
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            background: #fff;
+        }
+        
+        .trio-box-img.portrait-focus {
+            aspect-ratio: 0.85 / 1;
+        }
+        .trio-box-img.product-focus {
+            aspect-ratio: 0.85 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f7f7f8;
+        }
+
+        .trio-box-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .trio-box-img.product-focus img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .trio-box-img:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Petit point blanc d'interaction sur l'image de l'inspiration */
+        .interactive-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 54px;
+            height: 54px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            z-index: 5;
+        }
+        .interactive-dot:hover {
+            background: var(--charcoal);
+            color: var(--pure-white);
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        .trio-caption-footer {
+            margin-top: 14px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+        .trio-caption-footer span:last-child {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* SECTION 2 : BANNER IMMERSIVE PLEINE LARGEUR VIDEO STYLE */
+        .immersive-wide-banner {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            aspect-ratio: 2.3 / 1;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 90px;
+        }
+
+        .immersive-wide-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-text-overlay {
+            position: absolute;
+            top: 15%;
+            left: 6%;
+            max-width: 500px;
+            color: var(--pure-white);
+            z-index: 3;
+        }
+
+        .banner-text-overlay h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .video-play-trigger {
+            position: absolute;
+            bottom: 12%;
+            left: 6%;
+            width: 48px;
+            height: 48px;
+            background: var(--pure-white);
+            color: var(--charcoal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        .video-play-trigger:hover {
+            transform: scale(1.08);
+            background: var(--charcoal);
+            color: var(--pure-white);
+        }
+
+        /* SECTION 3 : DEUXIÈME GRILLE DE FILTRES + PRODUITS */
+        .section-headline-center {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 35px;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.8px;
+        }
+
+        .advice-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 22px;
+            border-radius: 100px;
+            background: var(--light-gray-bg);
+            color: var(--charcoal);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .filter-pill:hover, .filter-pill.active {
+            background: var(--charcoal);
+            color: var(--pure-white);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px 30px;
+            margin-bottom: 110px;
+        }
+
+        .article-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-img-box {
+            width: 100%;
+            aspect-ratio: 0.9 / 1;
+            overflow: hidden;
+            background: #fff;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .article-img-box img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .article-card:hover .article-img-box img {
+            transform: scale(1.04);
+        }
+
+        .article-content {
+            margin-top: 18px;
+        }
+
+        .article-content h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+        }
+        
+        .article-content p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* SECTION 4 : BLOCK FAQ ACCORDÉON (SPILL THE TEA) */
+        .faq-tea-section {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: start;
+            border-top: 1px solid var(--border-color);
+            padding-top: 80px;
+            margin-bottom: 4rem;
+        }
+
+        .faq-sticky-left {
+            position: sticky;
+            top: 130px;
+        }
+
+        .faq-artwork-box {
+            width: 100%;
+            aspect-ratio: 1.15 / 1;
+            background: #f4f2ee;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .faq-artwork-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .faq-tea-title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.8px;
+        }
+
+        /* ACCORDÉONS MINIMALISTES LIGNES FINES */
+        .accordion-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid var(--charcoal);
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            padding: 26px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            text-align: left;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--charcoal);
+            cursor: pointer;
+            text-transform: capitalize;
+        }
+
+        .accordion-state-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--charcoal);
+            font-weight: 600;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .accordion-content p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            padding-bottom: 26px;
+            max-width: 90%;
+        }
+
+        /* ── MENU MOBILE CORRIGÉ ── */
+        .mobile-nav-card { 
+            position: fixed; 
+            top: 95px; 
+            left: 20px; 
+            width: 260px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); 
+            border: 1px solid var(--border-color); 
+            border-radius: 12px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); 
+            z-index: 2000; 
+            padding: 12px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(-10px) scale(0.95); 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .mobile-nav-card.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .card-inner { display: flex; flex-direction: column; gap: 4px; }
+        .card-link { text-decoration: none; color: var(--charcoal); font-weight: 500; font-size: 0.9rem; padding: 12px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; transition: 0.2s; }
+        .card-link:hover { background: rgba(0,0,0,0.04); }
+
+        /* ── RESPONSIVE RESPÉCTÉ ── */
+        @media (max-width: 1024px) {
+            .inspiration-trio-gallery { grid-template-columns: 1fr; gap: 40px; }
+            .trio-col-text { gap: 20px; }
+            .articles-grid { grid-template-columns: repeat(2, 1fr); }
+            .faq-tea-section { grid-template-columns: 1fr; gap: 40px; }
+            .faq-sticky-left { position: relative; top: 0; }
+        }
+        @media (max-width: 768px) {
+            .logo-main { font-size: 18px; }
+            .logo-signature, .logo-sub { display: none; }
+            .advice-page-wrapper { margin: 110px auto 3rem; padding: 0 1rem; }
+            .articles-grid { grid-template-columns: 1fr; gap: 30px; }
+            .immersive-wide-banner { aspect-ratio: 1.4 / 1; }
+        }
+
+        /* ── FOOTER VERT INSTITUTIONNEL ── */
+         .capsule-footer {
+      background: var(--light-gray-bg);
+      /* Supprime ou commente le border-radius pour qu'il soit bien droit en bas */
+      /* border-radius: 40px; */ 
+      padding: 80px 80px 40px; /* Aligné sur le padding de ton bloc blanc */
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+
+      /* Astuce magique pour sortir du conteneur max-width et prendre 100% de l'écran */
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      
+      /* Optionnel : Supprime la marge arrondie du bas de page si tu veux qu'il colle parfaitement */
+      margin-bottom: -40px; 
+    }
+
+    .footer-top-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-brand {
+      font-family: var(--font-body);
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-statement h2 {
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 1.2;
+      max-width: 500px;
+      letter-spacing: -0.01em;
+    }
+
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      border-top: 1px solid #e5e5e7;
+      padding-top: 40px;
+    }
+
+    .footer-social-column {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+    .footer-social-column a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-social-column a:hover { color: var(--charcoal); }
+
+    .footer-column h5 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-column ul a {
+      font-size: 13.5px;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-column ul a:hover {
+      color: var(--text-muted);
+    }
+
+    </style>
+</head>
+<body>
+
+    <div id="mobileDrawer" class="mobile-nav-card">
+        <div class="card-inner">
+            <a href="#" class="card-link"><span class="material-symbols-outlined">home</span>Home</a>
+            <a href="#" class="card-link"><span class="material-symbols-outlined">category</span>Category</a>
+            <a href="#" class="card-link"><span class="material-symbols-outlined">info</span>About us</a>
+        </div>
+    </div>
+
+    <header id="mainHeader">
+        <nav>
+          <div class="nav-left">
+            <button class="menu-btn" id="openBtn" aria-label="Open Menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          <a href="index.html" class="nav-pill ">Accueil</a>
+        <a href="produit.html" class="nav-pill">Produits</a>
+        <a href="conseils.html" class="nav-pill  active">Conseils</a>
+        <a href="marques.html" class="nav-pill">Marques</a>
+
+          </div>
+
+          <div class="nav-center">
+            <span class="logo-sub">L'Atelier</span>
+            <span class="logo-signature">Botanique de</span>
+            <a href="#" class="logo-main">Skinora</a>
+          </div>
+
+          <div class="nav-right">
+            <button class="icon-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+            <button class="icon-btn" aria-label="Cart">
+             <a href="panier.html" style="color: #111;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+             </a>
+            </button>
+            <button class="icon-btn" aria-label="Account">
+             <a href="inscription.html" style="color: #111;">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+             </a>
+
+            </button>
+          </div>
+        </nav>
+    </header>
+
+    <main class="advice-page-wrapper">
+        
+        <section class="inspiration-trio-gallery">
+            <div class="trio-col-text">
+                <h1>Indulge Your Senses.<br>Experience the Transformation.</h1>
+                <div class="trio-caption-footer" style="padding-bottom: 5px;">
+                    <span>Previous / Next</span>
+                </div>
+            </div>
+            <div>
+                <div class="trio-box-img portrait-focus">
+                    <span class="interactive-dot">Details</span>
+                    <img src="Images/visage1.jpg" alt="Skin Application">
+                </div>
+                <div class="trio-caption-footer">
+                    <span>Morning Sunscreen</span>
+                    <span>$99</span>
+                </div>
+            </div>
+            <div>
+                <div class="trio-box-img product-focus">
+                    <img src="Images/Cor3.JPG" alt="Minimalist Bottle">
+                </div>
+                <div class="trio-caption-footer">
+                    <span>Body Lotion Blck</span>
+                    <span>$199</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="immersive-wide-banner">
+            <div class="banner-text-overlay">
+                <h2>Discover a new level of radiance with our innovative skincare solution.</h2>
+            </div>
+            <span class="video-play-trigger">Play</span>
+            <img src="Images/visage2.jpg" alt="Macro cream texture and application">
+        </section>
+
+        <h2 class="section-headline-center">Boost Your Transformation. Reveal Your Most Beautiful Self.</h2>
+        
+        <div class="advice-filters">
+            <span class="filter-pill active">New Arrival</span>
+            <span class="filter-pill">Protection</span>
+            <span class="filter-pill">Acne Fighter</span>
+            <span class="filter-pill">Anti-Aging</span>
+        </div>
+
+        <section class="articles-grid">
+            <article class="article-card">
+                <div class="article-img-box"><img src="Images/B1.jpg" alt="Sunscreen"></div>
+                <div class="article-content">
+                    <h3>Sunscreen</h3>
+                    <p>$199</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <div class="article-img-box"><img src="Images/serumj3.jpg" alt="Serum Aging"></div>
+                <div class="article-content">
+                    <h3>Serum Aging</h3>
+                    <p>$199</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <div class="article-img-box"><img src="Images/Cor2.JPG" alt="Facial Wash"></div>
+                <div class="article-content">
+                    <h3>Facial Wash</h3>
+                    <p>$99</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="faq-tea-section">
+            <div class="faq-sticky-left">
+                <div class="faq-artwork-box">
+                    <img src="Images/salon.jpg" alt="Luxury Atelier Display">
+                </div>
+                <h2 class="faq-tea-title">We've Got You Covered.<br>Spill the Tea.</h2>
+            </div>
+
+            <div class="accordion-container">
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+                        <span>What is Charme?</span>
+                        <span class="accordion-state-label">Hide</span>
+                    </button>
+                    <div class="accordion-content" style="max-height: 200px;">
+                        <p>Charme is a luxury skincare brand dedicated to helping you achieve healthy, radiant skin via tailored formulas and clinical excellence.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+                        <span>What makes Charme unique?</span>
+                        <span class="accordion-state-label">Show</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Our approach focuses on ultra-pure active botanical agents synthesized to adapt to your skin micro-flora seamlessly, without saturating its protective layers.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+                        <span>Where are Charme products made?</span>
+                        <span class="accordion-state-label">Show</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Every formula is conceptualized, researched, and premiumly bottled right inside our specialized botanical laboratories based in Paris.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+                        <span>How do I track my order?</span>
+                        <span class="accordion-state-label">Show</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Once dispatched, an ecosystem code will be immediately relayed to your mobile or email to track every single milestone of the vehicle deployment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+  
+    <footer class="capsule-footer">
+      <div class="footer-top-block">
+        <div class="footer-brand">skinora</div>
+        <div class="footer-statement">
+          <h2>It's never too late to start taking care of yourself</h2>
+        </div>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-social-column">
+          <a href="#">instagram</a>
+          <a href="#">pinterest</a>
+        </div>
+        
+        <div class="footer-column">
+          <h5>About</h5>
+          <ul>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Rewards</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Info</h5>
+          <ul>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Sazzle</a></li>
+            <li><a href="#">Refunds</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Other</h5>
+          <ul>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms of Policies</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+  
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const openBtn = document.getElementById('openBtn');
+            const mobileDrawer = document.getElementById('mobileDrawer');
+            if(openBtn && mobileDrawer) {
+                openBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    mobileDrawer.classList.toggle('active');
+                };
+                document.addEventListener('click', () => mobileDrawer.classList.remove('active'));
+            }
+        });
+
+        // Logique interactive pour l'accordéon minimaliste
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const label = button.querySelector('.accordion-state-label');
+            const isOpened = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+            // Fermer tous les autres accordéons
+            document.querySelectorAll('.accordion-content').forEach(item => item.style.maxHeight = '0px');
+            document.querySelectorAll('.accordion-state-label').forEach(lbl => lbl.innerText = 'Show');
+
+            if (!isOpened) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                label.innerText = 'Hide';
+            } else {
+                content.style.maxHeight = '0px';
+                label.innerText = 'Show';
+            }
+        }
+    </script>
+</body>
+</html>

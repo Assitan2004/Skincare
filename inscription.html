@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Créer un compte | Skinora</title>
+        
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>       
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+
+    <style>
+        :root {
+            --charcoal: #111111;
+            --pure-white: #ffffff;
+            --font-body: 'Inter', sans-serif;
+            --font-signature: 'Playfair Display', serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            --light-gray-bg: #f4f4f6;
+            --text-muted: #6e6e73;
+            --border-color: #E8E8E8;
+            --accent-pink: #F5E6E1;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: var(--font-body); 
+            background-color: #ffffff; 
+            color: var(--charcoal); 
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden;
+        }
+        
+        /* ── HEADER IDENTIQUE ── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            background: #fff;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            width: 100%;
+            padding: 0 32px;
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 12px; }
+        .menu-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;    
+            border: 1px solid var(--border-color);
+            color: var(--charcoal);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .menu-btn:hover { background:#fff; transform: scale(1.05); border-color: #fff; }
+        .menu-btn svg { width: 18px; height: 18px; stroke-width: 2; }
+
+        .nav-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 22px;
+            border-radius: 100px;
+            background: white;
+            border: 1px solid white;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: var(--transition);
+        }
+        .nav-pill:hover { background: #e5e5e7; }
+
+        .nav-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+            padding: 0 20px;
+        }
+        .logo-sub { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 400; color: var(--text-muted); }
+        .logo-signature { font-family: var(--font-signature); font-style: italic; font-size: 14px; color: var(--charcoal); font-weight: 400; margin-bottom: -2px; }
+        .logo-main { font-size: 22px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; }
+
+        .nav-right { display: flex; justify-content: flex-end; gap: 10px; }
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid white;
+            color: var(--charcoal);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: var(--transition);
+        }
+        .icon-btn:hover { background: #e5e5e7; transform: scale(1.05); }
+        .icon-btn svg { width: 18px; height: 18px; stroke-width: 1.8; }
+
+        /* ── CONFIGURATION SPLIT MODERNE ── */
+        .page-split-container {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            min-height: 100vh;
+            width: 100%;
+            background-color: var(--pure-white);
+        }
+
+        .split-image-side {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-image: url('Images/visage1.jpg'); /* Conserve l'image cinématique de la collection */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .split-image-side::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(12, 10, 9, 0.1), rgba(255, 255, 255, 0.05));
+        }
+
+        .split-form-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 60px 60px;
+            background: #ffffff;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .auth-header {
+            margin-bottom: 35px;
+        }
+
+        .auth-header h1 {
+            font-size: 2.4rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            color: var(--charcoal);
+        }
+
+        .auth-header p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Organisation nom/prénom côte à côte */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* CHAMPS DE SAISIE DESIGN ÉPURÉ LUXE */
+        .form-group {
+            margin-bottom: 26px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0;
+            font-size: 15px;
+            outline: none;
+            font-family: inherit;
+            color: var(--charcoal);
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            border-bottom-color: var(--charcoal);
+        }
+
+        .policy-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 35px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .policy-check input {
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: var(--charcoal);
+            width: 14px;
+            height: 14px;
+        }
+
+        .policy-check a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid var(--charcoal);
+        }
+        .policy-check a:hover { color: var(--text-muted); border-bottom-color: transparent; }
+
+        .auth-btn {
+            width: 100%;
+            background: var(--charcoal);
+            color: var(--pure-white);
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 28px;
+        }
+
+        .auth-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .auth-switch {
+            text-align: center;
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        .auth-switch a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid var(--charcoal);
+        }
+        .auth-switch a:hover { color: var(--text-muted); border-bottom-color: transparent; }
+
+        /* ── MENU MOBILE ── */
+        .mobile-nav-card { position: fixed; top: 95px; left: 20px; width: 260px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); z-index: 2000; padding: 12px; opacity: 0; visibility: hidden; transform: translateY(-10px) scale(0.95); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mobile-nav-card.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .card-inner { display: flex; flex-direction: column; gap: 4px; }
+        .card-link { text-decoration: none; color: var(--charcoal); font-weight: 500; font-size: 0.9rem; padding: 12px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; transition: 0.2s; }
+        .card-link:hover { background: rgba(0,0,0,0.04); }
+
+        /* ── CAPSULE FOOTER ADAPTÉ ── */
+        .capsule-footer {
+            background: var(--light-gray-bg);
+            padding: 80px 80px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .footer-top-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-brand {
+            font-family: var(--font-body);
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-statement h2 {
+            font-size: 36px;
+            font-weight: 400;
+            line-height: 1.2;
+            max-width: 500px;
+            letter-spacing: -0.01em;
+        }
+
+        .footer-links-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            border-top: 1px solid #e5e5e7;
+            padding-top: 40px;
+        }
+
+        .footer-social-column {
+            display: flex;
+            gap: 16px;
+            align-items: flex-end;
+        }
+        .footer-social-column a {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-social-column a:hover { color: var(--charcoal); }
+
+        .footer-column h5 {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-column ul a {
+            font-size: 13.5px;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-column ul a:hover {
+            color: var(--text-muted);
+        }
+
+        /* ── RESPONSIVE DESIGN INTERNE ── */
+        @media (max-width: 1024px) {
+            .page-split-container { grid-template-columns: 1fr; }
+            .split-image-side { display: none; }
+            .split-form-side { padding: 160px 40px 80px; }
+            .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 20px; }
+            .logo-main { font-size: 18px; }
+            .logo-signature, .logo-sub { display: none; }
+            .split-form-side { padding: 140px 24px 60px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .footer-grid, .footer-bottom, .footer-links-grid { grid-template-columns: 1fr; gap: 32px; }
+            .capsule-footer { padding: 60px 24px 40px; }
+            .footer-top-block { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mobileDrawer" class="mobile-nav-card">
+        <div class="card-inner">
+            <a href="index.html" class="card-link"><span class="material-symbols-outlined">home</span>Accueil</a>
+            <a href="produit.html" class="card-link"><span class="material-symbols-outlined">category</span>Produits</a>
+            <a href="conseils.html" class="card-link"><span class="material-symbols-outlined">info</span>Conseils</a>
+        </div>
+    </div>
+
+    <header id="mainHeader">
+        <nav>
+          <div class="nav-left">
+            <button class="menu-btn" id="openBtn" aria-label="Open Menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+            <a href="index.html" class="nav-pill">Accueil</a>
+            <a href="produit.html" class="nav-pill">Produits</a>
+            <a href="conseils.html" class="nav-pill">Conseils</a>
+            <a href="marques.html" class="nav-pill">Marques</a>
+          </div>
+
+          <div class="nav-center">
+            <span class="logo-sub">L'Atelier</span>
+            <span class="logo-signature">Botanique de</span>
+            <a href="#" class="logo-main">Skinora</a>
+          </div>
+
+          <div class="nav-right">
+            <button class="icon-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+            <button class="icon-btn" aria-label="Cart">
+              <a href="panier.html" style="color: var(--charcoal);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+              </a>
+            </button>
+            <button class="icon-btn" aria-label="Account">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </button>
+          </div>
+        </nav>
+    </header>
+
+    <div class="page-split-container">
+        
+        <div class="split-image-side"></div>
+        
+        <div class="split-form-side">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h1>Créer un compte</h1>
+                    <p>Rejoignez l'Atelier Botanique de Skinora et bénéficiez de protocoles cutanés exclusifs.</p>
+                </div>
+                
+                <form action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstname">Prénom</label>
+                            <input type="text" id="firstname" required placeholder="Jean">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Nom</label>
+                            <input type="text" id="lastname" required placeholder="Dupont">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Adresse e-mail</label>
+                        <input type="email" id="email" required placeholder="jean.dupont@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" required placeholder="Minimum 8 caractères">
+                    </div>
+                    
+                    <label class="policy-check">
+                        <input type="checkbox" required>
+                        <span>J'accepte sans réserve la <a href="#">Politique de Confidentialité</a> et les <a href="#">Conditions Générales de Vente</a> de l'Atelier Skinora.</span>
+                    </label>
+                    
+                    <button type="submit" class="auth-btn">Créer mon compte</button>
+                </form>
+                
+                <div class="auth-switch">
+                    Vous avez déjà un compte ? <a href="connexion.html">Se connecter</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="capsule-footer">
+      <div class="footer-top-block">
+        <div class="footer-brand">skinora</div>
+        <div class="footer-statement">
+          <h2>It's never too late to start taking care of yourself</h2>
+        </div>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-social-column">
+          <a href="#">instagram</a>
+          <a href="#">pinterest</a>
+        </div>
+        
+        <div class="footer-column">
+          <h5>About</h5>
+          <ul>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Rewards</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Info</h5>
+          <ul>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Sazzle</a></li>
+            <li><a href="#">Refunds</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Other</h5>
+          <ul>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms of Policies</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const openBtn = document.getElementById('openBtn');
+            const mobileDrawer = document.getElementById('mobileDrawer');
+            if(openBtn && mobileDrawer) {
+                openBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    mobileDrawer.classList.toggle('active');
+                };
+                document.addEventListener('click', () => mobileDrawer.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>

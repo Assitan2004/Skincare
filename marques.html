@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Nos Marques | Skinora</title>
+        
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>       
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+
+    <style>
+        :root {
+            --charcoal: #111111;
+            --pure-white: #ffffff;
+            --font-body: 'Inter', sans-serif;
+            --font-signature: 'Playfair Display', serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            --light-gray-bg: #f4f4f6;
+            --text-muted: #6e6e73;
+            --border-color: #E8E8E8;
+            --accent-pink: #F5E6E1;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: var(--font-body); 
+            background-color: #ffffff; 
+            color: var(--charcoal); 
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden;
+        }
+        
+        /* ── HEADER IDENTIQUE ── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            background: var(--pure-white);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.015);
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            width: 100%;
+            padding: 0 32px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .menu-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;    
+            border: 1px solid white;
+            color: var(--charcoal);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .menu-btn:hover { background: #e5e5e7; transform: scale(1.05); border-color: var(--charcoal); }
+        .menu-btn svg { width: 18px; height: 18px; stroke-width: 2; }
+
+        .nav-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 22px;
+            border-radius: 100px;
+            background: white;
+            border: 1px solid white;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: var(--transition);
+        }
+        .nav-pill:hover { background: #e5e5e7; }
+        .nav-pill.active {
+            background: #F5E6E1;
+            color: #1A1A1A;
+            border-color: #FDF5F2;
+            font-weight: 500;
+        }
+
+        .nav-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+            padding: 0 20px;
+        }
+        .logo-sub {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .logo-signature {
+            font-family: var(--font-signature);
+            font-style: italic;
+            font-size: 14px;
+            color: var(--charcoal);
+            font-weight: 400;
+            margin-bottom: -2px;
+        }
+        .logo-main {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid white;
+            color: var(--charcoal);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: var(--transition);
+        }
+        .icon-btn:hover { background: #e5e5e7; transform: scale(1.05); }
+        .icon-btn svg { width: 18px; height: 18px; stroke-width: 1.8; }
+
+        /* ── SECTION MARQUES EXTENSIBLE ── */
+        .brands-page-wrapper {
+            max-width: 1400px;
+            margin: 160px auto 5rem;
+            padding: 0 2rem;
+        }
+
+        .brands-intro {
+            max-width: 750px;
+            margin-bottom: 4rem;
+        }
+
+        .brands-intro h1 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+
+        .brands-intro p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* FILTRES PAR LETTRE (INDEX ALPHABÉTIQUE) */
+        .alphabet-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 2.5rem;
+        }
+
+        .letter-btn {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray-bg);
+            border-radius: 4px;
+            color: var(--charcoal);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .letter-btn:hover, .letter-btn.active {
+            background: var(--charcoal);
+            color: var(--pure-white);
+        }
+
+        /* MODULE DE RECHERCHE TEXTUELLE */
+        .search-brand-box {
+            position: relative;
+            max-width: 400px;
+            margin-bottom: 4rem;
+        }
+
+        .search-brand-box input {
+            width: 100%;
+            padding: 14px 18px 14px 45px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            font-size: 14px;
+            outline: none;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .search-brand-box input:focus {
+            border-color: var(--charcoal);
+        }
+
+        .search-brand-box .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 20px;
+        }
+
+        /* RÉPERTOIRE ET COLONNES ALPHABÉTIQUES */
+        .directory-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .directory-block {
+            margin-bottom: 20px;
+        }
+
+        .directory-letter {
+            font-size: 24px;
+            font-weight: 600;
+            border-bottom: 1px solid #F1F1F1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .brand-list {
+            list-style: none;
+        }
+
+        .brand-list-item {
+            margin-bottom: 12px;
+        }
+
+        .brand-list-item a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .brand-list-item a:hover {
+            color: var(--charcoal);
+            padding-left: 4px;
+        }
+
+        /* ── MENU MOBILE DRAWER ── */
+        .mobile-nav-card { 
+            position: fixed; 
+            top: 95px; 
+            left: 20px; 
+            width: 260px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); 
+            border: 1px solid var(--border-color); 
+            border-radius: 12px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); 
+            z-index: 2000; 
+            padding: 12px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(-10px) scale(0.95); 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .mobile-nav-card.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .card-inner { display: flex; flex-direction: column; gap: 4px; }
+        .card-link { text-decoration: none; color: var(--charcoal); font-weight: 500; font-size: 0.9rem; padding: 12px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; transition: 0.2s; }
+        .card-link:hover { background: rgba(0,0,0,0.04); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .directory-container { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 20px; }
+            .logo-main { font-size: 18px; }
+            .logo-signature, .logo-sub { display: none; }
+            .brands-page-wrapper { margin: 120px auto 3rem; padding: 0 1rem; }
+            .brands-intro h1 { font-size: 2rem; }
+            .directory-container { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        }
+        @media (max-width: 480px) {
+            .directory-container { grid-template-columns: 1fr; }
+        }
+
+       .capsule-footer {
+      background: var(--light-gray-bg);
+      /* Supprime ou commente le border-radius pour qu'il soit bien droit en bas */
+      /* border-radius: 40px; */ 
+      padding: 80px 80px 40px; /* Aligné sur le padding de ton bloc blanc */
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+
+      /* Astuce magique pour sortir du conteneur max-width et prendre 100% de l'écran */
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      
+      /* Optionnel : Supprime la marge arrondie du bas de page si tu veux qu'il colle parfaitement */
+      margin-bottom: -40px; 
+    }
+
+    .footer-top-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-brand {
+      font-family: var(--font-body);
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-statement h2 {
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 1.2;
+      max-width: 500px;
+      letter-spacing: -0.01em;
+    }
+
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      border-top: 1px solid #e5e5e7;
+      padding-top: 40px;
+    }
+
+    .footer-social-column {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+    .footer-social-column a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-social-column a:hover { color: var(--charcoal); }
+
+    .footer-column h5 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-column ul a {
+      font-size: 13.5px;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-column ul a:hover {
+      color: var(--text-muted);
+    }
+
+        /* ── CHATBOT ── */
+        #chatbot-launcher { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #1A1A1A; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 3000; transition: 0.3s; }
+        #chatbot-launcher:hover { transform: scale(1.05); }
+        #chat-window { position: fixed; bottom: 100px; right: 30px; width: 350px; height: 450px; background: #fff; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; z-index: 3000; }
+        .chat-header { background: #1A1A1A; color: #fff; padding: 20px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+        .chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: #fcfcfc; }
+        .message { padding: 10px 14px; border-radius: 8px; font-size: 0.85rem; max-width: 85%; line-height: 1.4; }
+        .bot { background: #eee; align-self: flex-start; color: #000; }
+        .user { background: #111; align-self: flex-end; color: #fff; }
+        .chat-footer { padding: 15px; border-top: 1px solid #eee; display: flex; gap: 10px; }
+        .chat-footer input { flex: 1; border: 1px solid #eee; padding: 10px; border-radius: 6px; outline: none; font-size: 0.85rem; }
+        .chat-footer button { background: #111; color: #fff; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="mobileDrawer" class="mobile-nav-card">
+        <div class="card-inner">
+            <a href="index.html" class="card-link"><span class="material-symbols-outlined">home</span>Accueil</a>
+            <a href="produit.html" class="card-link"><span class="material-symbols-outlined">category</span>Produits</a>
+            <a href="conseils.html" class="card-link"><span class="material-symbols-outlined">info</span>Conseils</a>
+        </div>
+    </div>
+
+    <header id="mainHeader">
+        <nav>
+          <div class="nav-left">
+            <button class="menu-btn" id="openBtn" aria-label="Open Menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+            <a href="index.html" class="nav-pill">Accueil</a>
+            <a href="produit.html" class="nav-pill">Produits</a>
+            <a href="conseils.html" class="nav-pill">Conseils</a>
+            <a href="marques.html" class="nav-pill active">Marques</a>
+          </div>
+
+          <div class="nav-center">
+            <span class="logo-sub">L'Atelier</span>
+            <span class="logo-signature">Botanique de</span>
+            <a href="#" class="logo-main">Skinora</a>
+          </div>
+
+          <div class="nav-right">
+            <button class="icon-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+            <button class="icon-btn" aria-label="Cart">
+              <a href="panier.html" style="color: var(--charcoal);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+              </a>
+            </button>
+            <button class="icon-btn" aria-label="Account">
+                  <a href="inscription.html" style="color: var(--charcoal);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </a>
+
+            </button>
+          </div>
+        </nav>
+    </header>
+
+    <main class="brands-page-wrapper">
+        <section class="brands-intro">
+            <h1>Toutes nos marques</h1>
+            <p>Explorez notre catalogue complet de laboratoires et de maisons de dermo-cosmétique rigoureusement sélectionnés par nos soins.</p>
+        </section>
+
+        <div class="alphabet-nav">
+            <span class="letter-btn active" onclick="filtrerLettre('ALL')">Tous</span>
+            <span class="letter-btn" onclick="filtrerLettre('A')">A</span>
+            <span class="letter-btn" onclick="filtrerLettre('B')">B</span>
+            <span class="letter-btn" onclick="filtrerLettre('C')">C</span>
+            <span class="letter-btn" onclick="filtrerLettre('D')">D</span>
+            <span class="letter-btn" onclick="filtrerLettre('S')">S</span>
+            <span class="letter-btn" onclick="filtrerLettre('T')">T</span>
+            <span class="letter-btn" onclick="filtrerLettre('V')">V</span>
+        </div>
+
+        <div class="search-brand-box">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input type="text" id="brandSearchInput" onkeyup="rechercherMarque()" placeholder="Rechercher par marque...">
+        </div>
+
+        <section class="directory-container" id="directory-container">
+            
+            <div class="directory-block" data-letter="A">
+                <div class="directory-letter">A</div>
+                <ul class="brand-list">
+                    <li class="brand-list-item"><a href="#">A'PIEU</a></li>
+                    <li class="brand-list-item"><a href="#">ABIB</a></li>
+                    <li class="brand-list-item"><a href="#">AMLACTIN</a></li>
+                    <li class="brand-list-item"><a href="#">ANUA</a></li>
+                </ul>
+            </div>
+
+            <div class="directory-block" data-letter="B">
+                <div class="directory-letter">B</div>
+                <ul class="brand-list">
+                    <li class="brand-list-item"><a href="#">BANILA CO</a></li>
+                    <li class="brand-list-item"><a href="#">BAREN</a></li>
+                    <li class="brand-list-item"><a href="#">BEAUTY OF JOSEON</a></li>
+                    <li class="brand-list-item"><a href="#">BEPLAIN</a></li>
+                </ul>
+            </div>
+
+            <div class="directory-block" data-letter="C">
+                <div class="directory-letter">C</div>
+                <ul class="brand-list">
+                    <li class="brand-list-item"><a href="#">CERAVE</a></li>
+                    <li class="brand-list-item"><a href="#">COSRX</a></li>
+                </ul>
+            </div>
+
+            <div class="directory-block" data-letter="D">
+                <div class="directory-letter">D</div>
+                <ul class="brand-list">
+                    <li class="brand-list-item"><a href="#">DR.MELAXIN</a></li>
+                    <li class="brand-list-item"><a href="#">DR.G</a></li>
+                </ul>
+            </div>
+
+            <div class="directory-block" data-letter="S">
+                <div class="directory-letter">S</div>
+                <ul class="brand-list">
+                    <li class="brand-list-item"><a href="#">SVR</a></li>
+                    <li class="brand-list-item"><a href="#">SKIN1004</a></li>
+                </ul>
+            </div>
+
+            <div class="directory-block" data-letter="T">
+                <div class="directory-letter">T</div>
+                <ul class="brand-list">
+                    <li class="brand-list-item"><a href="#">THE ORDINARY</a></li>
+                    <li class="brand-list-item"><a href="#">THE LAB</a></li>
+                </ul>
+            </div>
+
+            <div class="directory-block" data-letter="V">
+                <div class="directory-letter">V</div>
+                <ul class="brand-list">
+                    <li class="brand-list-item"><a href="#">VICHY</a></li>
+                    <li class="brand-list-item"><a href="#">VT COSMETICS</a></li>
+                </ul>
+            </div>
+
+        </section>
+    </main>
+
+     <footer class="capsule-footer">
+      <div class="footer-top-block">
+        <div class="footer-brand">skinora</div>
+        <div class="footer-statement">
+          <h2>It's never too late to start taking care of yourself</h2>
+        </div>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-social-column">
+          <a href="#">instagram</a>
+          <a href="#">pinterest</a>
+        </div>
+        
+        <div class="footer-column">
+          <h5>About</h5>
+          <ul>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Rewards</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Info</h5>
+          <ul>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Sazzle</a></li>
+            <li><a href="#">Refunds</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Other</h5>
+          <ul>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms of Policies</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+   
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Interaction Drawer Mobile
+            const openBtn = document.getElementById('openBtn');
+            const mobileDrawer = document.getElementById('mobileDrawer');
+            if(openBtn && mobileDrawer) {
+                openBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    mobileDrawer.classList.toggle('active');
+                };
+                document.addEventListener('click', () => mobileDrawer.classList.remove('active'));
+            }
+        });
+
+        // --- FILTRE ALPHABÉTIQUE INTERACTIF ---
+        function filtrerLettre(lettre) {
+            // Gestion active des boutons de l'index
+            const boutons = document.querySelectorAll('.letter-btn');
+            boutons.forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const blocs = document.querySelectorAll('.directory-block');
+            blocs.forEach(bloc => {
+                if (lettre === 'ALL' || bloc.getAttribute('data-letter') === lettre) {
+                    bloc.style.display = 'block';
+                } else {
+                    bloc.style.display = 'none';
+                }
+            });
+        }
+
+        // --- RECHERCHE CONTEXTUELLE DYNAMIQUE ---
+        function rechercherMarque() {
+            const input = document.getElementById('brandSearchInput');
+            const filter = input.value.toUpperCase();
+            const blocs = document.querySelectorAll('.directory-block');
+
+            blocs.forEach(bloc => {
+                const items = bloc.querySelectorAll('.brand-list-item');
+                let blocContientMatch = false;
+
+                items.forEach(item => {
+                    const textValue = item.textContent || item.innerText;
+                    if (textValue.toUpperCase().indexOf(filter) > -1) {
+                        item.style.display = "";
+                        blocContientMatch = true;
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+
+                // Si aucune marque du bloc ne correspond, on cache le bloc entier (la lettre)
+                if (blocContientMatch) {
+                    bloc.style.display = "block";
+                } else {
+                    bloc.style.display = "none";
+                }
+            });
+        }
+
+        // --- INTERACTION CHATBOT SYSTEM ---
+        const launcher = document.getElementById('chatbot-launcher');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+        if(launcher) launcher.onclick = () => chatWindow.style.display = 'flex';
+        if(closeChat) closeChat.onclick = () => chatWindow.style.display = 'none';
+    </script>
+</body>
+</html>

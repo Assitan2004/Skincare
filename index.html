@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skinora – Elevate Your Skincare Routine</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET & VARIABLES BENTO/GLASS ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --charcoal: #111111;
+      --pure-white: #ffffff;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-bg-hover: rgba(255, 255, 255, 0.18);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --glass-blur: blur(16px);
+      --font-body: 'Inter', sans-serif;
+      --font-signature: 'Playfair Display', serif;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      
+      /* Variables blocs clairs */
+      --light-gray-bg: #f4f4f6;
+      --text-muted: #6e6e73;
+      --pill-bg: #ecebe6;
+      --pill-active-bg: #ccbe9f;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-body); background: #0c0a09; color: var(--pure-white); overflow-x: hidden; }
+
+    /* ── HERO GLOBAL BACKGROUND (Conteneur parent pour l'effet transparent) ── */
+    .hero-container {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      background-image: url('Images/visage1.jpg'); /* Mets ton image ici */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(12,10,9,0.4) 0%, rgba(12,10,9,0.2) 60%, rgba(12,10,9,1) 100%);
+      z-index: 1;
+    }
+
+    /* ── HEADER HYBRIDE : STRUCTURE LV + GLASSMOPHISM BENTO ── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    }
+
+    /* Classe dynamique pour masquer proprement la barre de navigation */
+    header.hidden-nav {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    nav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 30px 32px;
+      z-index: 2;
+      transition: var(--transition);
+    }
+
+    /* GAUCHE : Bouton Menu + Pilules de Navigation */
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .menu-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--pure-white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .menu-btn:hover { background: var(--glass-bg-hover); transform: scale(1.05); }
+    .menu-btn svg { width: 18px; height: 18px; stroke-width: 2; }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 100px;
+      color: var(--pure-white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+    }
+    .nav-pill:hover { background: var(--glass-bg-hover); }
+    .nav-pill.active {
+      background: var(--pure-white);
+      color: var(--charcoal);
+      font-weight: 500;
+      border-color: var(--pure-white);
+    }
+
+    /* CENTRE : Identité Visuelle Signée Louis Vuitton */
+    .nav-center {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.1;
+      padding: 0 40px;
+    }
+    .logo-sub {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.6);
+      transition: var(--transition);
+    }
+    .logo-signature {
+      font-family: var(--font-signature);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--pure-white);
+      font-weight: 400;
+      transition: var(--transition);
+    }
+    .logo-main {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--pure-white);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    /* DROITE : Icônes Utilitaires dans des cercles Glass */
+    .nav-right {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--pure-white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: var(--transition);
+    }
+    .icon-btn:hover { background: var(--glass-bg-hover); transform: scale(1.05); }
+    .icon-btn svg { width: 18px; height: 18px; stroke-width: 1.5; }
+    
+    .cart-badge {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 6px; height: 6px;
+      background: var(--pure-white);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    /* ── STYLES APPLIQUÉS AU SCROLL (NAVBAR DEVIENT BLANCHE) ── */
+    header.scrolled nav {
+      background: var(--pure-white);
+      border-color: rgba(0, 0, 0, 0.06);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    }
+    header.scrolled .logo-main,
+    header.scrolled .logo-signature {
+      color: var(--charcoal);
+    }
+    header.scrolled .logo-sub {
+      color: var(--text-muted);
+    }
+    header.scrolled .menu-btn,
+    header.scrolled .icon-btn,
+    header.scrolled .nav-pill {
+      color: var(--charcoal);
+    }
+    header.scrolled .icon-btn{
+        color: #111;
+    }
+    header.scrolled a{
+      color: #1A1A1A;
+    }
+    header.scrolled .menu-btn:hover,
+    header.scrolled .icon-btn:hover,
+    header.scrolled .nav-pill:hover {
+       background: #e5e5e7;
+    }
+    header.scrolled .nav-pill.active {
+      background: #F5E6E1;
+      color: #1A1A1A;
+      border-color: #FDF5F2;
+    }
+    header.scrolled .cart-badge {
+      background: var(--charcoal);
+    }
+
+    /* ── HERO TEXT CONTENT ── */
+    .hero-content-area {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 80px;
+      max-width: 800px;
+    }
+    .hero-content-area h1 {
+      font-size: 56px;
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+    .hero-content-area h1 span {
+      font-weight: 600;
+    }
+    .hero-content-area p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    /* ── NOUVEAU BLOC PRINCIPAL BLANC ET TEXTE SOMBRE ── */
+    .main-content-white {
+      background: var(--pure-white);
+      color: var(--charcoal);
+      padding: 100px 80px 40px;
+      width: 100%;
+    }
+
+    .inner-container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION : NOS MARQUES ── */
+    .brands-section {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .brands-section h2 {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 40px;
+    }
+    .brands-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 48px;
+    }
+    .brands-grid img {
+      max-height: 200px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(0);
+      opacity: 1;
+      transition: var(--transition);
+    }
+    .brands-grid img:hover {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+
+    /* ── SECTION : SELECTIONS PAR PREOCCUPATION ── */
+    .concern-section {
+      margin-bottom: 120px;
+      text-align: center;
+    }
+    .concern-section h2 {
+      font-size: 36px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 32px;
+    }
+    
+    .concern-pills-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 60px;
+    }
+    .concern-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .concern-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 22px;
+      border-radius: 100px;
+      background: var(--light-gray-bg);
+      color: var(--charcoal);
+      font-size: 13px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .concern-pill:hover {
+      background: #e5e5e7;
+    }
+    .concern-pill.active {
+      background: #F5E6E1;
+      color: var(--charcoal);
+      font-weight: 500;
+    }
+
+    /* Structure du Carrousel */
+    .carousel-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .carousel-track-container {
+      overflow-x: auto;
+      width: 100%;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .carousel-track-container::-webkit-scrollbar {
+      display: none;
+    }
+    .carousel-track {
+      display: flex;
+      gap: 24px;
+      padding: 10px 0;
+    }
+
+    /* DESIGN EXCLUSIF DE LA CARTE PRODUIT ARRONDIE */
+    .concern-card {
+      flex: 0 0 calc(33.333% - 16px);
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      position: relative;
+    }
+    .concern-img-box {
+      width: 100%;
+      aspect-ratio: 1.15/1;
+      border-radius: 32px;
+      background: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .concern-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .concern-card:hover .concern-img-box img {
+      transform: scale(1.03);
+    }
+
+    /* Bouton favori cœur */
+    .fav-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      color: #f5ece7;
+      z-index: 1000;
+    }
+    .fav-btn:hover {
+      background: rgba(255, 255, 255, 0.8);
+    }
+    .fav-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--pure-white);
+      color: var(--pure-white);
+    }
+
+    /* Infos de la carte */
+    .concern-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      padding: 0 4px;
+    }
+    .concern-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .concern-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--charcoal);
+      line-height: 1.2;
+    }
+    .concern-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    /* Bouton d'action flèche noire */
+    .action-circle-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .action-circle-btn:hover {
+      background: #F5E6E1;
+      transform: scale(1.05);
+    }
+    .action-circle-btn svg {
+      width: 16px;
+      height: 16px;
+      color: var(--pure-white);
+      stroke-width: 2.5;
+    }
+
+    /* Flèches de navigation globales du carrousel */
+    .nav-arrow {
+      position: absolute;
+      top: 40%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--pure-white);
+      border: 1px solid #e5e5e7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .nav-arrow:hover {
+      background: var(--light-gray-bg);
+      border-color: var(--charcoal);
+    }
+    .nav-arrow svg { width: 16px; height: 16px; stroke-width: 2; color: var(--charcoal); }
+    .arrow-left { left: -22px; }
+    .arrow-right { right: -22px; }
+
+    /* SECTION EDITORIALE ASYMETRIQUE */
+    .editorial-beauty-section {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+      margin-bottom: 120px;
+    }
+
+    .editorial-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .editorial-title h2 {
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+    .editorial-title h2 span {
+      font-weight: 600;
+      display: block;
+    }
+
+    .floating-about-btn {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #fdf5f2;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .floating-about-btn:hover {
+      transform: rotate(15deg) scale(1.05);
+      background: var(--charcoal);
+      color: var(--pure-white);
+    }
+    .floating-about-btn svg {
+      width: 14px; height: 14px; margin-bottom: 4px;
+    }
+
+    /* Grille asymétrique des images éditoriales */
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr;
+      gap: 32px;
+      align-items: end;
+    }
+
+    .editorial-col img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .editorial-col p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 90%;
+    }
+
+    .pill-btn-outline {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 28px;
+      border: 1px solid var(--charcoal);
+      border-radius: 100px;
+      background: transparent;
+      color: var(--charcoal);
+      font-size: 14px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .pill-btn-outline:hover {
+      background: var(--charcoal);
+      color: var(--pure-white);
+    }
+
+    .editorial-col h4 {
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    /* ── STYLE DE LA SECTION VIDÉO PLEIN ÉCRAN (100% LARGEUR EFFECTIVE) ── */
+    .video-fullscreen-section {
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100vh; /* Prend exactement tout l'écran en hauteur */
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Force la vidéo à remplir tout l'espace sans déformation */
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    /* Voile sombre optionnel pour améliorer la lisibilité du texte */
+    .video-fullscreen-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+
+    /* Contenu textuel sur la vidéo */
+    .video-overlay-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .video-overlay-content h2 {
+      font-family: var(--font-signature);
+      font-style: italic;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--pure-white);
+      margin-bottom: 16px;
+    }
+
+    .video-overlay-content p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      letter-spacing: 0.05em;
+    }
+
+    /* SECTION INSTAGRAM GRID */
+    .instagram-section {
+      margin-bottom: 100px;
+    }
+
+    .instagram-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .instagram-header h3 {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .insta-handle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border: 1px solid #e0e0e0;
+      border-radius: 100px;
+      font-size: 14px;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .insta-handle-btn:hover {
+      border-color: var(--charcoal);
+      background: #fafafa;
+    }
+
+    /* Grille de photos asymétriques avec coins très arrondis */
+    .instagram-mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .mosaic-item {
+      overflow: hidden;
+      border-radius: 28px;
+    }
+    .mosaic-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: var(--transition);
+    }
+    .mosaic-item:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Tailles alternées */
+    .m-tall { grid-row: span 2; aspect-ratio: 3/5; }
+    .m-square { aspect-ratio: 1/1; }
+
+    /* SECTION FOOTER CAPSULE */
+  /* ── SECTION FOOTER CAPSULE ── */
+    .capsule-footer {
+      background: var(--light-gray-bg);
+      /* Supprime ou commente le border-radius pour qu'il soit bien droit en bas */
+      /* border-radius: 40px; */ 
+      padding: 80px 80px 40px; /* Aligné sur le padding de ton bloc blanc */
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+
+      /* Astuce magique pour sortir du conteneur max-width et prendre 100% de l'écran */
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      
+      /* Optionnel : Supprime la marge arrondie du bas de page si tu veux qu'il colle parfaitement */
+      margin-bottom: -40px; 
+    }
+
+    .footer-top-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-brand {
+      font-family: var(--font-body);
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-statement h2 {
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 1.2;
+      max-width: 500px;
+      letter-spacing: -0.01em;
+    }
+
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      border-top: 1px solid #e5e5e7;
+      padding-top: 40px;
+    }
+
+    .footer-social-column {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+    .footer-social-column a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-social-column a:hover { color: var(--charcoal); }
+
+    .footer-column h5 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-column ul a {
+      font-size: 13.5px;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-column ul a:hover {
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE DESIGN ── */
+    @media (max-width: 1024px) {
+      .nav-left a { display: none; }
+      .hero-content-area h1 { font-size: 42px; }
+      .concern-card { flex: 0 0 calc(50% - 12px); }
+      .editorial-grid { grid-template-columns: 1fr 1fr; }
+      .editorial-col:last-child { grid-column: span 2; }
+      .instagram-mosaic { grid-template-columns: repeat(2, 1fr); }
+      .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      header { padding: 12px; }
+      nav { grid-template-columns: auto 1fr auto; padding: 8px 16px; }
+      .nav-center { padding: 0 12px; }
+      .logo-main { font-size: 16px; }
+      .logo-signature, .logo-sub { display: none; }
+      .hero-content-area { padding: 0 24px; }
+      
+      .main-content-white { padding: 60px 24px; }
+      .concern-card { flex: 0 0 100%; }
+      .editorial-grid, .instagram-mosaic, .footer-top-block, .footer-links-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-social-column { align-items: flex-start; margin-top: 20px; }
+    }
+
+/* Force l'icône panier et son lien à devenir noirs après le scroll */
+header.scrolled .icon-btn a {
+  color: var(--charcoal) !important;
+}
+  </style>
+</head>
+<body>
+
+<div class="hero-container">
+  
+  <header id="mainHeader">
+    <nav>
+      <div class="nav-left">
+        <button class="menu-btn" aria-label="Open Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+        <a href="index.html" class="nav-pill active">Accueil</a>
+        <a href="produit.html" class="nav-pill">Produits</a>
+        <a href="conseils.html" class="nav-pill">Conseils</a>
+        <a href="marques.html" class="nav-pill">Marques</a>
+
+      </div>
+
+      <div class="nav-center">
+        <span class="logo-sub">L'Atelier</span>
+        <span class="logo-signature">Botanique de</span>
+        <a href="#" class="logo-main">Skinora</a>
+      </div>
+
+      <div class="nav-right">
+        <button class="icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+       <a href="panier.html" style="text-decoration: none;">
+  <button class="icon-btn" aria-label="Cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+    </svg>
+    <span class="cart-badge"></span>
+  </button>
+</a>
+       <a href="inscription.html" style="text-decoration: none;">
+
+        <button class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+        </a>
+
+      </div>
+    </nav>
+  </header>
+
+  <div class="hero-content-area">
+    <h1>Transform Your Look with Expert Products at <span>Our Luxury Center</span></h1>
+    <p>Revitalize your skin and spirit with Skinora. Step into a world of clinical excellence and unlock your inner glow instantly.</p>
+  </div>
+
+</div>
+
+<main class="main-content-white">
+  <div class="inner-container">
+
+ <section class="editorial-beauty-section">
+      <div class="editorial-top-row">
+        <div class="editorial-title">
+          <h2>Your Beauty And Success <span>Start Here!</span></h2>
+        </div>
+        <button class="floating-about-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+          About Us
+        </button>
+      </div>
+
+      <div class="editorial-grid">
+        <div class="editorial-col">
+          <img src="Images/visage2.jpg" alt="Revitalize Your Skin" style="margin-bottom: 24px;">
+          <p>Revitalize Your Skin and Spirit at Our Premier Botanical Beauty Center.</p>
+          <a href="#" class="pill-btn-outline">Read More ↗</a>
+        </div>
+        <div class="editorial-col">
+          <img src="Images/texture.jpg" alt="Cream Texture">
+        </div>
+        <div class="editorial-col">
+          <h4>Discover Your Beauty Potential</h4>
+          <img src="Images/salon.jpg" alt="Luxury Atelier">
+        </div>
+      </div>
+    </section>
+
+    <section class="concern-section">
+      <h2>Nos sélections par préoccupation</h2>
+      
+      <div class="concern-pills-container">
+        <div class="concern-row">
+          <a href="#" class="concern-pill active">Acné &amp; boutons</a>
+          <a href="#" class="concern-pill">Brillance &amp; pores visibles</a>
+          <a href="#" class="concern-pill">Cernes</a>
+          <a href="#" class="concern-pill">Déshydratation</a>
+          <a href="#" class="concern-pill">Éclat &amp; uniformité</a>
+          <a href="#" class="concern-pill">Peau fragilisée / sensible</a>
+          <a href="#" class="concern-pill">Points noirs</a>
+          <a href="#" class="concern-pill">Rides et ridules</a>
+        </div>
+        <div class="concern-row">
+          <a href="#" class="concern-pill">Taches pigmentaires</a>
+        </div>
+      </div>
+
+      <div class="carousel-wrapper">
+        <button class="nav-arrow arrow-left" id="slideLeft" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        
+        <div class="carousel-track-container" id="carouselContainer">
+          <div class="carousel-track">
+            
+            <div class="concern-card">
+              <div class="concern-img-box">
+                <button class="fav-btn" aria-label="Add to favorites">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </button>
+                <img src="Images/B1.jpg" alt="Glow Serum">
+              </div>
+              <div class="concern-info-row">
+                <div class="concern-text-block">
+                  <div class="concern-title">Glow Serum</div>
+                  <div class="concern-price">$56.00</div>
+                </div>
+                <button class="action-circle-btn" aria-label="View product">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="concern-card">
+              <div class="concern-img-box">
+                <button class="fav-btn" aria-label="Add to favorites">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </button>
+                <img src="Images/serumj3.jpg" alt="BB Cream">
+              </div>
+              <div class="concern-info-row">
+                <div class="concern-text-block">
+                  <div class="concern-title">BB Cream</div>
+                  <div class="concern-price">$56.00</div>
+                </div>
+                <button class="action-circle-btn" aria-label="View product">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="concern-card">
+              <div class="concern-img-box">
+                <button class="fav-btn" aria-label="Add to favorites">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </button>
+                <img src="Images/Cor2.JPG" alt="Sun Cream">
+              </div>
+              <div class="concern-info-row">
+                <div class="concern-text-block">
+                  <div class="concern-title">Sun Cream</div>
+                  <div class="concern-price">$56.00</div>
+                </div>
+                <button class="action-circle-btn" aria-label="View product">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <button class="nav-arrow arrow-right" id="slideRight" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </section>
+
+  
+    <section class="video-fullscreen-section" id="videoSection">
+      <video autoplay muted loop playsinline class="bg-video">
+        <source src="Images/video1.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas les vidéos HTML5.
+      </video>
+     
+    </section>
+
+      <section class="brands-section" style="padding-top: 45px;">
+      <h2>Nos marques</h2>
+      <div class="brands-grid">
+        <img src="Images/logo_roche.jpg" alt="Abib">
+        <img src="Images/logo_commo.jpg" alt="Commonlabs">
+        <img src="Images/logo_cerave.jpg" alt="Etude">
+        <img src="Images/logo_beauty.jpg" alt="Beauty of Joseon">
+        <img src="Images/ordinary_logo.jpg" alt="Lashilé Beauty">
+        <img src="Images/svr_logo.jpg" alt="NHCO">
+        <img src="Images/logo_mela.jpg" alt="Dr.Melaxin">
+        <img src="Images/vichy_logo.jpg" alt="Biodance">
+        <img src="Images/ACM_logo.jpg" alt="ACM">
+      </div>
+    </section>
+
+
+    <section class="instagram-section">
+      <div class="instagram-header">
+        <h3>Follow us on Instagram</h3>
+        <a href="https://instagram.com" target="_blank" class="insta-handle-btn">
+          @skinora_cosmetics
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </div>
+
+      <div class="instagram-mosaic">
+        <div class="mosaic-item m-tall"><img src="Images/visage1.jpg" alt="Skincare routine"></div>
+        <div class="mosaic-item m-tall"><img src="Images/visage2.jpg" alt="Model glow"></div>
+        <div class="mosaic-item m-square"><img src="Images/texture.jpg" alt="Product flatlay"></div>
+        <div class="mosaic-item m-tall"><img src="Images/serumj3.jpg" alt="Applying serum"></div>
+        <div class="mosaic-item m-square"><img src="Images/visage3.jpg" alt="Skincare bottles"></div>
+      </div>
+    </section>
+
+    <footer class="capsule-footer">
+      <div class="footer-top-block">
+        <div class="footer-brand">skinora</div>
+        <div class="footer-statement">
+          <h2>It's never too late to start taking care of yourself</h2>
+        </div>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-social-column">
+          <a href="#">instagram</a>
+          <a href="#">pinterest</a>
+        </div>
+        
+        <div class="footer-column">
+          <h5>About</h5>
+          <ul>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Rewards</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Info</h5>
+          <ul>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Sazzle</a></li>
+            <li><a href="#">Refunds</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Other</h5>
+          <ul>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms of Policies</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</main>
+
+<script>
+  // ── LOGIQUE DU CARROUSEL DE PRODUITS ──
+  const container = document.getElementById('carouselContainer');
+  document.getElementById('slideRight').addEventListener('click', () => {
+    container.scrollBy({ left: 320, behavior: 'smooth' });
+  });
+  document.getElementById('slideLeft').addEventListener('click', () => {
+    container.scrollBy({ left: -320, behavior: 'smooth' });
+  });
+
+  // ── EFFET DYNAMIQUE NAVBAR BLANCHE AU SCROLL & DISPARITION VIDÉO ──
+  const header = document.getElementById('mainHeader');
+  const videoSection = document.getElementById('videoSection');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Utilisation d'un IntersectionObserver strict pour traquer l'affichage à 100% de la vidéo
+  const observerOptions = {
+    root: null,
+    threshold: 0.35 // Masque dès que la section vidéo occupe un tiers de l'écran visible
+  };
+
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        header.classList.add('hidden-nav');
+      } else {
+        header.classList.remove('hidden-nav');
+      }
+    });
+  }, observerOptions);
+
+  if (videoSection) {
+    videoObserver.observe(videoSection);
+  }
+</script>
+
+</body>
+</html>
