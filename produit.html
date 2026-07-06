@@ -36,39 +36,51 @@
             color: var(--charcoal);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* ── HEADER STANDARD FIXE : FOND BLANC PERMANENT ── */
-     #mainHeader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9999;
-    background: var(--pure-white);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-}
+        /* ── HEADER RESPONSIVE OPTIMISÉ ── */
+        #mainHeader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            background: var(--pure-white);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        }
+
         nav {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            display: flex;
             align-items: center;
-            padding: 20px 32px;
-            z-index: 2;
+            justify-content: space-between;
+            padding: 16px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        /* GAUCHE : Bouton Menu + Pilules de Navigation */
+        @media (min-width: 1024px) {
+            nav {
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+                padding: 20px 32px;
+            }
+        }
+
+        /* GAUCHE : Bouton Menu + Pilules */
         .nav-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
+
         .menu-btn {
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: white;
-            border: 1px solid white;
+            background: #f4f4f6;
+            border: 1px solid transparent;
             color: var(--charcoal);
             cursor: pointer;
             display: flex;
@@ -77,13 +89,22 @@
             transition: var(--transition);
         }
         .menu-btn:hover { background: #e5e5e7; transform: scale(1.05); }
-        .menu-btn svg { width: 18px; height: 18px; stroke-width: 2; }
+        .menu-btn svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; }
+
+        .nav-pills-desktop {
+            display: none;
+            gap: 8px;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-pills-desktop { display: flex; }
+        }
 
         .nav-pill {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 100px;
             color: var(--charcoal);
             text-decoration: none;
@@ -96,54 +117,67 @@
         .nav-pill.active {
             background: #F5E6E1;
             color: #1A1A1A;
-            border-color: #FDF5F2;
             font-weight: 500;
         }
 
-        /* CENTRE : Identité Visuelle */
+        /* CENTRE : Logo */
         .nav-center {
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             line-height: 1.1;
-            padding: 0 40px;
         }
+        
+        @media (max-width: 1023px) {
+            .nav-center {
+                align-items: center;
+                text-align: center;
+            }
+        }
+
         .logo-sub {
-            font-size: 9px;
+            font-size: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.25em;
             font-weight: 400;
             color: var(--text-muted);
         }
         .logo-signature {
             font-family: var(--font-signature);
             font-style: italic;
-            font-size: 15px;
+            font-size: 13px;
             color: var(--charcoal);
             font-weight: 400;
         }
         .logo-main {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 500;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--charcoal);
             text-decoration: none;
         }
 
-        /* DROITE : Icônes Utilitaires */
+        @media (min-width: 768px) {
+            .logo-sub { font-size: 9px; letter-spacing: 0.3em; }
+            .logo-signature { font-size: 15px; }
+            .logo-main { font-size: 22px; }
+        }
+
+        /* DROITE : Icônes */
         .nav-right {
             display: flex;
             justify-content: flex-end;
-            gap: 10px;
+            gap: 6px;
         }
+
         .icon-btn {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: white;
-            border: 1px solid white;
+            background: transparent;
+            border: 1px solid transparent;
             color: var(--charcoal);
             cursor: pointer;
             display: flex;
@@ -152,9 +186,14 @@
             position: relative;
             transition: var(--transition);
         }
-        .icon-btn:hover { background: #e5e5e7; transform: scale(1.05); }
-        .icon-btn svg { width: 18px; height: 18px; stroke-width: 1.5; }
+        .icon-btn:hover { background: #f4f4f6; transform: scale(1.05); }
+        .icon-btn svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.5; }
         
+        @media (min-width: 768px) {
+            .icon-btn { width: 44px; height: 44px; }
+            .icon-btn svg { width: 20px; height: 20px; }
+        }
+
         .cart-badge {
             position: absolute;
             top: 10px; right: 10px;
@@ -163,24 +202,150 @@
             border-radius: 50%;
         }
 
-        .shop-header{
-    position: relative;
-    z-index: 1;
-}
-
-        /* --- CONTENEUR GLOBAL AVEC SIDEBAR --- */
-        .shop-container {
-            display: flex;
-            max-width: 1400px;
-            padding: 0 2rem;
-            gap: 40px;
-            margin:160px auto 0;
+        /* AJUSTEMENTS EN MODE RESPONSIVE MOBILE */
+        @media (max-width: 768px) {
+            /* Cacher la recherche et le panier */
+            .nav-right [aria-label="Search"],
+            .nav-right [aria-label="Cart"] {
+                display: none !important;
+            }
+            
+            /* Laissez juste le mot Skinora dans le logo */
+            .logo-sub, 
+            .logo-signature {
+                display: none !important;
+            }
+            .logo-main {
+                font-size: 18px;
+            }
         }
 
-        /* --- FILTRES SIDEBAR --- */
+        /* ── MOBILE OVERLAY MENU (DRAWER) ── */
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--pure-white);
+            z-index: 10000;
+            box-shadow: 20px 0 40px rgba(0,0,0,0.05);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            transition: var(--transition);
+        }
+        .mobile-drawer.open { left: 0; }
+        
+        .drawer-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(4px);
+        }
+        .drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 16px;
+        }
+        .close-drawer-btn {
+            background: none; border: none; font-size: 24px; cursor: pointer; color: var(--charcoal);
+        }
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .mobile-nav-links .nav-pill {
+            justify-content: flex-start;
+            font-size: 15px;
+            padding: 12px 20px;
+            width: 100%;
+        }
+
+        /* ── FILTRES VERSION MOBILE (TIROIR MODAL) ── */
+        .mobile-filters-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 340px;
+            height: 100vh;
+            background: var(--pure-white);
+            z-index: 10000;
+            box-shadow: -20px 0 40px rgba(0,0,0,0.05);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+            transition: var(--transition);
+        }
+        .mobile-filters-drawer.open { right: 0; }
+
+        .mobile-filter-btn-box {
+            display: inline-flex;
+        }
+        @media (min-width: 1024px) {
+            .mobile-filter-btn-box { display: none !important; }
+        }
+
+        .btn-filter-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #eaeaea;
+            padding: 8px 16px;
+            font-size: 12px;
+            background: white;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        /* ── STRUCTURE CONTENU GLOBAL ── */
+        .shop-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 1400px;
+            padding: 0 1.5rem;
+            gap: 30px;
+            margin: 120px auto 0;
+        }
+
+        @media (min-width: 1024px) {
+            .shop-container {
+                flex-direction: row;
+                gap: 40px;
+                margin-top: 160px;
+                padding: 0 2rem;
+            }
+        }
+
+        /* ── FILTRES SIDEBAR DESKTOP ── */
         .sidebar-filters {
             width: 240px;
             flex-shrink: 0;
+            position: sticky;
+            top: 140px;
+            align-self: flex-start;
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .sidebar-filters { display: block; }
         }
 
         .filter-group {
@@ -194,7 +359,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
-            cursor: pointer;
         }
 
         .filter-title-box h4 {
@@ -235,71 +399,63 @@
             height: 15px;
         }
 
-        .filter-count {
-            color: #aaa;
-            font-size: 11px;
-            margin-left: 2px;
-        }
+        .filter-count { color: #aaa; font-size: 11px; margin-left: 2px; }
+        .price-range-box { padding-top: 10px; }
+        .price-slider { width: 100%; accent-color: #111; margin-bottom: 10px; }
+        .price-values { font-size: 12px; color: #666; }
 
-        .price-range-box {
-            padding-top: 10px;
-        }
-
-        .price-slider {
-            width: 100%;
-            accent-color: #111;
-            margin-bottom: 10px;
-        }
-
-        .price-values {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .sidebar-filters{
-    width:240px;
-    flex-shrink:0;
-    position:sticky;
-    top:160px;
-    align-self:flex-start;
-}
-
-        /* --- CONTENT RIGHT --- */
+        /* ── RIGHT MAIN CONTENT ── */
         .main-shop-content {
             flex-grow: 1;
+            width: 100%;
         }
 
         .shop-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             border-bottom: 1px solid #eaeaea;
             padding-bottom: 15px;
+            gap: 10px;
         }
 
-        .products-count {
-            font-size: 13px;
-            color: #666;
+        .products-count { font-size: 13px; color: #666; flex-grow: 1; }
+
+        .shop-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .sort-select-box {
             border: 1px solid #eaeaea;
-            padding: 8px 16px;
+            padding: 8px 12px;
             font-size: 12px;
             font-family: inherit;
             background: white;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            border-radius: 4px;
         }
 
-        /* --- PRODUCT GRID ET CARDS --- */
+        /* ── PRODUCT GRID RESPONSIVE ── */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 50px 30px;
-            padding-bottom: 10rem;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 40px 20px;
+            padding-bottom: 6rem;
+        }
+
+        @media (min-width: 480px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 15px; }
+        }
+        @media (min-width: 768px) {
+            .product-grid { grid-template-columns: repeat(3, 1fr); gap: 40px 24px; }
+        }
+        @media (min-width: 1200px) {
+            .product-grid { gap: 50px 30px; }
         }
 
         .product-card {
@@ -309,10 +465,7 @@
             flex-direction: column;
             align-items: flex-start;
             transition: 0.3s ease;
-        }
-
-        .product-card.hidden {
-            display: none !important;
+            height: 100%;
         }
 
         .image-container {
@@ -338,69 +491,28 @@
 
         .favorite-btn {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: none;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #ccc;
-            transition: 0.3s;
-            z-index: 2;
+            top: 15px; left: 15px;
+            background: none; border: none;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: #ccc; transition: 0.3s; z-index: 2;
         }
-
         .favorite-btn:hover { color: #111; }
         .favorite-btn .material-symbols-outlined { font-size: 20px; font-weight: 300; }
 
         .soldout-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+            bottom: 0; left: 0; width: 100%;
             background: rgba(140, 140, 140, 0.85);
-            color: white;
-            text-align: center;
-            padding: 8px 0;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 400;
-            z-index: 3;
+            color: white; text-align: center;
+            padding: 8px 0; font-size: 11px;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            font-weight: 400; z-index: 3;
         }
 
-        .product-brand {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #888;
-            margin-bottom: 4px;
-        }
-
-        .product-card h3 {
-            font-weight: 400;
-            font-size: 13.5px;
-            letter-spacing: 0.02em;
-            color: #333;
-            margin-bottom: 6px;
-            line-height: 1.4;
-        }
-
-        .product-price {
-            font-weight: 500;
-            color: #111;
-            font-size: 14px;
-            margin-bottom: 6px;
-        }
-
-        .product-rating {
-            display: flex;
-            gap: 2px;
-            color: #ccbe9f;
-            font-size: 10px;
-            margin-bottom: 15px;
-        }
+        .product-brand { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #888; margin-bottom: 4px; }
+        .product-card h3 { font-weight: 400; font-size: 13.5px; letter-spacing: 0.02em; color: #333; margin-bottom: 6px; line-height: 1.4; }
+        .product-price { font-weight: 500; color: #111; font-size: 14px; margin-bottom: 6px; }
+        .product-rating { display: flex; gap: 2px; color: #ccbe9f; font-size: 10px; margin-bottom: 15px; }
 
         .add-to-cart {
             background: none;
@@ -421,105 +533,66 @@
             gap: 5px;
             margin-top: auto;
         }
-
         .add-to-cart:hover { background: #111; color: white; }
 
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .product-grid { grid-template-columns: repeat(2, 1fr); }
-            .sidebar-filters { display: none; }
+        /* ── SECTION FOOTER RESPONSIVE ── */
+        .capsule-footer {
+            background: var(--light-gray-bg);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            width: 100%;
+            margin-top: 4rem;
         }
-        @media (max-width: 650px) {
-            .product-grid { grid-template-columns: repeat(2,1fr); gap: 30px 15px; }
-            .shop-container { margin-top: 110px; padding: 0 1rem; }
+
+        @media (min-width: 768px) {
+            .capsule-footer { padding: 60px 40px; gap: 50px; }
+        }
+        @media (min-width: 1024px) {
+            .capsule-footer { padding: 80px 80px 40px; gap: 60px; }
         }
 
-        /* --- FOOTER --- */
-       /* ── SECTION FOOTER CAPSULE ── */
-    .capsule-footer {
-      background: var(--light-gray-bg);
-      /* Supprime ou commente le border-radius pour qu'il soit bien droit en bas */
-      /* border-radius: 40px; */ 
-      padding: 80px 80px 40px; /* Aligné sur le padding de ton bloc blanc */
-      display: flex;
-      flex-direction: column;
-      gap: 60px;
+        .footer-top-block {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
 
-      /* Astuce magique pour sortir du conteneur max-width et prendre 100% de l'écran */
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      
-      /* Optionnel : Supprime la marge arrondie du bas de page si tu veux qu'il colle parfaitement */
-      margin-bottom: -40px; 
-    }
+        @media (min-width: 768px) {
+            .footer-top-block { flex-direction: row; align-items: center; }
+        }
 
-    .footer-top-block {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
+        .footer-brand { font-family: var(--font-body); font-size: 24px; font-weight: 500; letter-spacing: -0.02em; text-transform: uppercase; }
+        .footer-statement h2 { font-size: clamp(24px, 5vw, 36px); font-weight: 400; line-height: 1.2; max-width: 500px; letter-spacing: -0.01em; }
 
-    .footer-brand {
-      font-family: var(--font-body);
-      font-size: 24px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-    }
+        .footer-links-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            border-top: 1px solid #e5e5e7;
+            padding-top: 40px;
+        }
 
-    .footer-statement h2 {
-      font-size: 36px;
-      font-weight: 400;
-      line-height: 1.2;
-      max-width: 500px;
-      letter-spacing: -0.01em;
-    }
+        @media (min-width: 480px) {
+            .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .footer-links-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+        }
 
-    .footer-links-grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 40px;
-      border-top: 1px solid #e5e5e7;
-      padding-top: 40px;
-    }
+        .footer-social-column { display: flex; gap: 16px; padding-top: 10px; }
+        @media (min-width: 1024px) { .footer-social-column { align-items: flex-end; padding-top: 0; } }
+        
+        .footer-social-column a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: var(--transition); text-transform: capitalize; }
+        .footer-social-column a:hover { color: var(--charcoal); }
 
-    .footer-social-column {
-      display: flex;
-      gap: 16px;
-      align-items: flex-end;
-    }
-    .footer-social-column a {
-      font-size: 13px;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .footer-social-column a:hover { color: var(--charcoal); }
-
-    .footer-column h5 {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .footer-column ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .footer-column ul a {
-      font-size: 13.5px;
-      color: var(--charcoal);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .footer-column ul a:hover {
-      color: var(--text-muted);
-    }
+        .footer-column h5 { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer-column ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-column ul a { font-size: 13.5px; color: var(--charcoal); text-decoration: none; transition: var(--transition); }
+        .footer-column ul a:hover { color: var(--text-muted); }
 
     </style>
 </head>
@@ -527,46 +600,102 @@
 
     <header id="mainHeader">
         <nav>
-          <div class="nav-left">
-            <button class="menu-btn" aria-label="Open Menu">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-            </button>
-            <a href="index.html" class="nav-pill ">Accueil</a>
-        <a href="produit.html" class="nav-pill active">Produits</a>
-        <a href="conseils.html" class="nav-pill">Conseils</a>
-        <a href="marques.html" class="nav-pill">Marques</a>
+            <div class="nav-left">
+                <button class="menu-btn" onclick="toggleDrawer(true)" aria-label="Open Menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+                </button>
+                <div class="nav-pills-desktop">
+                    <a href="index.html" class="nav-pill">Accueil</a>
+                    <a href="produit.html" class="nav-pill active">Produits</a>
+                    <a href="conseils.html" class="nav-pill">Conseils</a>
+                    <a href="marques.html" class="nav-pill">Marques</a>
+                </div>
+            </div>
 
-          </div>
+            <div class="nav-center">
+                <span class="logo-sub">L'Atelier</span>
+                <span class="logo-signature">Botanique de</span>
+                <a href="#" class="logo-main">Skinora</a>
+            </div>
 
-          <div class="nav-center">
-            <span class="logo-sub">L'Atelier</span>
-            <span class="logo-signature">Botanique de</span>
-            <a href="#" class="logo-main">Skinora</a>
-          </div>
-
-          <div class="nav-right">
-            <button class="icon-btn" aria-label="Search">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            </button>
-            <button class="icon-btn" aria-label="Cart">
-                <a href="panier.html" style="color: #111;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
-              <span class="cart-badge"></span>
-              </a>
-            </button>
-            <button class="icon-btn" aria-label="Account">
-             <a href="inscription.html" style="color: #111;">
-
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-             </a>
-
-            </button>
-          </div>
+            <div class="nav-right">
+                <button class="icon-btn" aria-label="Search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </button>
+                <button class="icon-btn" aria-label="Cart">
+                    <a href="panier.html" style="color: #111;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                        <span class="cart-badge"></span>
+                    </a>
+                </button>
+                <button class="icon-btn" aria-label="Account">
+                    <a href="inscription.html" style="color: #111;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </a>
+                </button>
+            </div>
         </nav>
     </header>
 
-    <div class="shop-container">
+    <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeAllDrawers()"></div>
+    
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <span class="logo-main" style="font-size: 20px;">Skinora</span>
+            <button class="close-drawer-btn" onclick="toggleDrawer(false)">&times;</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html" class="nav-pill">Accueil</a>
+            <a href="produit.html" class="nav-pill active">Produits</a>
+            <a href="conseils.html" class="nav-pill">Conseils</a>
+            <a href="marques.html" class="nav-pill">Marques</a>
+        </div>
+    </div>
+
+    <div class="mobile-filters-drawer" id="mobileFiltersDrawer">
+        <div class="drawer-header">
+            <h4 style="text-transform: uppercase; font-size: 14px; letter-spacing: 0.05em;">Filtres</h4>
+            <button class="close-drawer-btn" onclick="toggleFiltersDrawer(false)">&times;</button>
+        </div>
         
+        <div class="filter-group">
+            <div class="filter-title-box">
+                <h4>Disponibilité</h4>
+                <button class="filter-reset-link">Réinitialiser</button>
+            </div>
+            <ul class="filter-options-list">
+                <li><label class="filter-checkbox-label"><input type="checkbox"> En stock <span class="filter-count">(242)</span></label></li>
+                <li><label class="filter-checkbox-label"><input type="checkbox"> En rupture <span class="filter-count">(105)</span></label></li>
+            </ul>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title-box">
+                <h4>Prix</h4>
+                <button class="filter-reset-link">Réinitialiser</button>
+            </div>
+            <div class="price-range-box">
+                <input type="range" class="price-slider" min="0" max="38000" value="38000">
+                <div class="price-values">Prix: 0 FCFA – 38,000 FCFA</div>
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title-box">
+                <h4>Par marque</h4>
+                <button class="filter-reset-link">Réinitialiser</button>
+            </div>
+            <ul class="filter-options-list">
+                <li><label class="filter-checkbox-label"><input type="checkbox"> A'PIEU <span class="filter-count">(5)</span></label></li>
+                <li><label class="filter-checkbox-label"><input type="checkbox"> ABIB <span class="filter-count">(17)</span></label></li>
+                <li><label class="filter-checkbox-label"><input type="checkbox"> ACM <span class="filter-count">(1)</span></label></li>
+                <li><label class="filter-checkbox-label"><input type="checkbox"> ANUA <span class="filter-count">(23)</span></label></li>
+                <li><label class="filter-checkbox-label"><input type="checkbox"> APLB <span class="filter-count">(7)</span></label></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="shop-container">
         <aside class="sidebar-filters">
             <div class="filter-group">
                 <div class="filter-title-box">
@@ -574,16 +703,8 @@
                     <button class="filter-reset-link">Réinitialiser</button>
                 </div>
                 <ul class="filter-options-list">
-                    <li>
-                        <label class="filter-checkbox-label">
-                            <input type="checkbox"> En stock <span class="filter-count">(242)</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="filter-checkbox-label">
-                            <input type="checkbox"> En rupture de stock <span class="filter-count">(105)</span>
-                        </label>
-                    </li>
+                    <li><label class="filter-checkbox-label"><input type="checkbox"> En stock <span class="filter-count">(242)</span></label></li>
+                    <li><label class="filter-checkbox-label"><input type="checkbox"> En rupture <span class="filter-count">(105)</span></label></li>
                 </ul>
             </div>
 
@@ -616,11 +737,18 @@
         <main class="main-shop-content">
             <header class="shop-header">
                 <div class="products-count">345 produits</div>
-                <select class="sort-select-box">
-                    <option>Trier par</option>
-                    <option>Prix croissant</option>
-                    <option>Prix décroissant</option>
-                </select>
+                <div class="shop-header-actions">
+                    <div class="mobile-filter-btn-box">
+                        <button class="btn-filter-trigger" onclick="toggleFiltersDrawer(true)">
+                            <span class="material-symbols-outlined" style="font-size:16px;">tune</span> Filtres
+                        </button>
+                    </div>
+                    <select class="sort-select-box">
+                        <option>Trier par</option>
+                        <option>Prix croissant</option>
+                        <option>Prix décroissant</option>
+                    </select>
+                </div>
             </header>
 
             <div class="product-grid" id="products-grid">
@@ -631,7 +759,7 @@
                         <div class="soldout-overlay">Épuisé</div>
                     </div>
                     <div class="product-brand">Kojie San</div>
-                    <h3>Kic Acid Soap</h3>
+                    <h3>Kojic Acid Soap</h3>
                     <div class="product-price">9,500 FCFA - 12,000 FCFA</div>
                     <div class="product-rating">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -668,49 +796,6 @@
                     <button class="add-to-cart" onclick="ajouterAuPanier(3, 'Glycolic Acid', 10000, 'serumj3.jpg')">Ajouter</button>
                 </div>
 
-                  <div class="product-card" data-cat="nettoyant">
-                    <div class="image-container">
-                        <button class="favorite-btn"><span class="material-symbols-outlined">favorite</span></button>
-                        <img src="Images/Cor2.JPG" class="product-image" alt="Soin">
-                        <div class="soldout-overlay">Épuisé</div>
-                    </div>
-                    <div class="product-brand">Kojie San</div>
-                    <h3>Kic Acid Soap</h3>
-                    <div class="product-price">9,500 FCFA - 12,000 FCFA</div>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <button class="add-to-cart" onclick="ajouterAuPanier(1, 'Kojic Acid Soap', 9500, 'Cor2.JPG')">Ajouter</button>
-                </div>
-
-                <div class="product-card" data-cat="serum">
-                    <div class="image-container">
-                        <button class="favorite-btn"><span class="material-symbols-outlined">favorite</span></button>
-                        <img src="Images/Cor3.JPG" class="product-image" alt="Soin">
-                        <div class="soldout-overlay">Épuisé</div>
-                    </div>
-                    <div class="product-brand">Anua</div>
-                    <h3>Niacinamide 10% + TXA 4% Dark Spot Correcting Serum</h3>
-                    <div class="product-price">14,000 FCFA</div>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <button class="add-to-cart" onclick="ajouterAuPanier(2, 'Anua Serum', 14000, 'Cor3.JPG')">Ajouter</button>
-                </div>
-
-                <div class="product-card" data-cat="nettoyant">
-                    <div class="image-container">
-                        <button class="favorite-btn"><span class="material-symbols-outlined">favorite</span></button>
-                        <img src="Images/serumj3.jpg" class="product-image" alt="Soin">
-                    </div>
-                    <div class="product-brand">The Ordinary</div>
-                    <h3>Glycolic Acid 7% Toning Solution</h3>
-                    <div class="product-price">10,000 FCFA - 13,500 FCFA</div>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <button class="add-to-cart" onclick="ajouterAuPanier(3, 'Glycolic Acid', 10000, 'serumj3.jpg')">Ajouter</button>
-                </div>
                 <div class="product-card" data-cat="nettoyant">
                     <div class="image-container">
                         <button class="favorite-btn"><span class="material-symbols-outlined">favorite</span></button>
@@ -722,78 +807,112 @@
                     <div class="product-rating">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <button class="add-to-cart" onclick="ajouterAuPanier(4, 'Gel Moussant CeraVe', 12500, 'B1.jpg')">Ajouter au panier</button>
+                    <button class="add-to-cart" onclick="ajouterAuPanier(4, 'Gel Moussant CeraVe', 12500, 'B1.jpg')">Ajouter</button>
                 </div>
             </div>
         </main>
     </div>
 
     <footer class="capsule-footer">
-      <div class="footer-top-block">
-        <div class="footer-brand">skinora</div>
-        <div class="footer-statement">
-          <h2>It's never too late to start taking care of yourself</h2>
-        </div>
-      </div>
-
-      <div class="footer-links-grid">
-        <div class="footer-social-column">
-          <a href="#">instagram</a>
-          <a href="#">pinterest</a>
-        </div>
-        
-        <div class="footer-column">
-          <h5>About</h5>
-          <ul>
-            <li><a href="#">Our Mission</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Rewards</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
+        <div class="footer-top-block">
+            <div class="footer-brand">skinora</div>
+            <div class="footer-statement">
+                <h2>It's never too late to start taking care of yourself</h2>
+            </div>
         </div>
 
-        <div class="footer-column">
-          <h5>Info</h5>
-          <ul>
-            <li><a href="#">Search</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Sazzle</a></li>
-            <li><a href="#">Refunds</a></li>
-          </ul>
-        </div>
+        <div class="footer-links-grid">
+            <div class="footer-social-column">
+                <a href="#">instagram</a>
+                <a href="#">pinterest</a>
+            </div>
+            
+            <div class="footer-column">
+                <h5>About</h5>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Rewards</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
 
-        <div class="footer-column">
-          <h5>Other</h5>
-          <ul>
-            <li><a href="#">Shipping</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms of Policies</a></li>
-          </ul>
+            <div class="footer-column">
+                <h5>Info</h5>
+                <ul>
+                    <li><a href="#">Search</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Sazzle</a></li>
+                    <li><a href="#">Refunds</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h5>Other</h5>
+                <ul>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms of Policies</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
     </footer>
 
- 
     <script>
         const API = "http://127.0.0.1:5000";
 
         document.addEventListener("DOMContentLoaded", () => {
-            // Reprise session / panier si besoin
             const user = JSON.parse(localStorage.getItem("user"));
         });
+
+        // Pilote le menu de navigation mobile
+        function toggleDrawer(open) {
+            const drawer = document.getElementById("mobileDrawer");
+            const backdrop = document.getElementById("drawerBackdrop");
+            if (open) {
+                drawer.classList.add("open");
+                backdrop.classList.add("open");
+                document.body.style.overflow = "hidden";
+            } else {
+                drawer.classList.remove("open");
+                backdrop.classList.remove("open");
+                document.body.style.overflow = "";
+            }
+        }
+
+        // Pilote le tiroir de filtres sur mobile
+        function toggleFiltersDrawer(open) {
+            const filtersDrawer = document.getElementById("mobileFiltersDrawer");
+            const backdrop = document.getElementById("drawerBackdrop");
+            if (open) {
+                filtersDrawer.classList.add("open");
+                backdrop.classList.add("open");
+                document.body.style.overflow = "hidden";
+            } else {
+                filtersDrawer.classList.remove("open");
+                backdrop.classList.remove("open");
+                document.body.style.overflow = "";
+            }
+        }
+
+        // Ferme tous les volets ouverts au clic sur le fond flouté
+        function closeAllDrawers() {
+            toggleDrawer(false);
+            toggleFiltersDrawer(false);
+        }
 
         function ajouterAuPanier(id, nom, prix, image) {
             let panier = JSON.parse(localStorage.getItem("panier") || "[]");
             const index = panier.findIndex(item => item.id === id);
-                                
+                                                        
             if (index !== -1) {
                 panier[index].quantite += 1;
             } else {
                 panier.push({ id, nom, prix, image, quantite: 1 });
             }
-                                
+                                                        
             localStorage.setItem("panier", JSON.stringify(panier));
-                                
+                                                        
             const msg = document.createElement("div");
             msg.textContent = `✅ ${nom} ajouté au panier !`;
             msg.style.cssText = `

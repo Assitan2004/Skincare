@@ -156,7 +156,7 @@
         .icon-btn:hover { background: #e5e5e7; transform: scale(1.05); }
         .icon-btn svg { width: 18px; height: 18px; stroke-width: 1.8; }
 
-        /* ── INTERFACE STRUCURALE DU JOURNAL (INSPIRATION IMAGE) ── */
+        /* ── INTERFACE STRUCTURALE DU JOURNAL ── */
         .advice-page-wrapper {
             max-width: 1400px;
             margin: 140px auto 5rem;
@@ -223,7 +223,6 @@
             transform: scale(1.02);
         }
 
-        /* Petit point blanc d'interaction sur l'image de l'inspiration */
         .interactive-dot {
             position: absolute;
             top: 50%;
@@ -265,7 +264,7 @@
             font-weight: 400;
         }
 
-        /* SECTION 2 : BANNER IMMERSIVE PLEINE LARGEUR VIDEO STYLE */
+        /* SECTION 2 : BANNER IMMERSIVE PLEINE LARGEUR */
         .immersive-wide-banner {
             width: 100vw;
             margin-left: calc(-50vw + 50%);
@@ -324,7 +323,7 @@
             color: var(--pure-white);
         }
 
-        /* SECTION 3 : DEUXIÈME GRILLE DE FILTRES + PRODUITS */
+        /* SECTION 3 : GRILLE DE FILTRES HORIZONTAUX + ARTICLES */
         .section-headline-center {
             text-align: center;
             max-width: 600px;
@@ -337,10 +336,26 @@
 
         .advice-filters {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
             gap: 10px;
             margin-bottom: 40px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            width: 100%;
+            padding: 5px 0;
+        }
+        .advice-filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (min-width: 769px) {
+            .advice-filters {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
 
         .filter-pill {
@@ -355,6 +370,7 @@
             text-decoration: none;
             transition: var(--transition);
             cursor: pointer;
+            flex-shrink: 0;
         }
         .filter-pill:hover, .filter-pill.active {
             background: var(--charcoal);
@@ -413,7 +429,7 @@
             color: var(--text-muted);
         }
 
-        /* SECTION 4 : BLOCK FAQ ACCORDÉON (SPILL THE TEA) */
+        /* SECTION 4 : BLOCK FAQ ACCORDÉON */
         .faq-tea-section {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -451,7 +467,6 @@
             letter-spacing: -0.8px;
         }
 
-        /* ACCORDÉONS MINIMALISTES LIGNES FINES */
         .accordion-container {
             display: flex;
             flex-direction: column;
@@ -501,7 +516,7 @@
             max-width: 90%;
         }
 
-        /* ── MENU MOBILE CORRIGÉ ── */
+        /* ── MENU MOBILE CARD ── */
         .mobile-nav-card { 
             position: fixed; 
             top: 95px; 
@@ -525,155 +540,181 @@
         .card-link { text-decoration: none; color: var(--charcoal); font-weight: 500; font-size: 0.9rem; padding: 12px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; transition: 0.2s; }
         .card-link:hover { background: rgba(0,0,0,0.04); }
 
-        /* ── RESPONSIVE RESPÉCTÉ ── */
+        /* ── INTERFACE RESPONSIVE APPLIQUÉE ── */
         @media (max-width: 1024px) {
             .inspiration-trio-gallery { grid-template-columns: 1fr; gap: 40px; }
-            .trio-col-text { gap: 20px; }
+            .trio-col-text { gap: 20px; padding-right: 0; }
             .articles-grid { grid-template-columns: repeat(2, 1fr); }
             .faq-tea-section { grid-template-columns: 1fr; gap: 40px; }
             .faq-sticky-left { position: relative; top: 0; }
         }
+
         @media (max-width: 768px) {
-            .logo-main { font-size: 18px; }
-            .logo-signature, .logo-sub { display: none; }
+            nav { display: flex; justify-content: space-between; padding: 0 24px; }
+            .nav-pill { display: none; }
+            
+            /* Masquer recherche et panier, laisser uniquement profil */
+            .nav-right [aria-label="Search"],
+            .nav-right [aria-label="Cart"] {
+                display: none !important;
+            }
+            
+            /* Laissez juste le mot Skinora dans le logo */
+            .logo-sub, 
+            .logo-signature {
+                display: none !important;
+            }
+            .logo-main {
+                font-size: 18px;
+            }
+
             .advice-page-wrapper { margin: 110px auto 3rem; padding: 0 1rem; }
             .articles-grid { grid-template-columns: 1fr; gap: 30px; }
             .immersive-wide-banner { aspect-ratio: 1.4 / 1; }
+            .banner-text-overlay { left: 8%; top: 10%; right: 8%; }
+            .video-play-trigger { left: 8%; bottom: 10%; }
         }
 
-        /* ── FOOTER VERT INSTITUTIONNEL ── */
-         .capsule-footer {
-      background: var(--light-gray-bg);
-      /* Supprime ou commente le border-radius pour qu'il soit bien droit en bas */
-      /* border-radius: 40px; */ 
-      padding: 80px 80px 40px; /* Aligné sur le padding de ton bloc blanc */
-      display: flex;
-      flex-direction: column;
-      gap: 60px;
+        /* ── FOOTER RESPONSIVE ── */
+        .capsule-footer {
+            background: var(--light-gray-bg);
+            padding: 80px 80px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: -40px; 
+        }
 
-      /* Astuce magique pour sortir du conteneur max-width et prendre 100% de l'écran */
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      
-      /* Optionnel : Supprime la marge arrondie du bas de page si tu veux qu'il colle parfaitement */
-      margin-bottom: -40px; 
-    }
+        .footer-top-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
 
-    .footer-top-block {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
+        .footer-brand {
+            font-family: var(--font-body);
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
 
-    .footer-brand {
-      font-family: var(--font-body);
-      font-size: 24px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-    }
+        .footer-statement h2 {
+            font-size: 36px;
+            font-weight: 400;
+            line-height: 1.2;
+            max-width: 500px;
+            letter-spacing: -0.01em;
+        }
 
-    .footer-statement h2 {
-      font-size: 36px;
-      font-weight: 400;
-      line-height: 1.2;
-      max-width: 500px;
-      letter-spacing: -0.01em;
-    }
+        .footer-links-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            border-top: 1px solid #e5e5e7;
+            padding-top: 40px;
+        }
 
-    .footer-links-grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 40px;
-      border-top: 1px solid #e5e5e7;
-      padding-top: 40px;
-    }
+        .footer-social-column {
+            display: flex;
+            gap: 16px;
+            align-items: flex-end;
+        }
+        .footer-social-column a {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-social-column a:hover { color: var(--charcoal); }
 
-    .footer-social-column {
-      display: flex;
-      gap: 16px;
-      align-items: flex-end;
-    }
-    .footer-social-column a {
-      font-size: 13px;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .footer-social-column a:hover { color: var(--charcoal); }
+        .footer-column h5 {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
 
-    .footer-column h5 {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
+        .footer-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
-    .footer-column ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+        .footer-column ul a {
+            font-size: 13.5px;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-column ul a:hover {
+            color: var(--text-muted);
+        }
 
-    .footer-column ul a {
-      font-size: 13.5px;
-      color: var(--charcoal);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .footer-column ul a:hover {
-      color: var(--text-muted);
-    }
+        @media (max-width: 900px) {
+            .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+            .capsule-footer { padding: 60px 40px 40px; }
+        }
 
+        @media (max-width: 768px) {
+            .footer-top-block { flex-direction: column; gap: 20px; }
+            .footer-statement h2 { font-size: 28px; }
+            .footer-links-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-social-column { align-items: flex-start; margin-top: 10px; }
+            .capsule-footer { padding: 60px 24px 40px; }
+        }
     </style>
 </head>
 <body>
 
     <div id="mobileDrawer" class="mobile-nav-card">
         <div class="card-inner">
-            <a href="#" class="card-link"><span class="material-symbols-outlined">home</span>Home</a>
-            <a href="#" class="card-link"><span class="material-symbols-outlined">category</span>Category</a>
-            <a href="#" class="card-link"><span class="material-symbols-outlined">info</span>About us</a>
+            <a href="index.html" class="card-link"><span class="material-symbols-outlined">home</span>Accueil</a>
+            <a href="produit.html" class="card-link"><span class="material-symbols-outlined">category</span>Produits</a>
+            <a href="conseils.html" class="card-link"><span class="material-symbols-outlined">info</span>Conseils</a>
+            <a href="marques.html" class="card-link"><span class="material-symbols-outlined">star</span>Marques</a>
         </div>
     </div>
 
     <header id="mainHeader">
         <nav>
-          <div class="nav-left">
-            <button class="menu-btn" id="openBtn" aria-label="Open Menu">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-            </button>
-          <a href="index.html" class="nav-pill ">Accueil</a>
-        <a href="produit.html" class="nav-pill">Produits</a>
-        <a href="conseils.html" class="nav-pill  active">Conseils</a>
-        <a href="marques.html" class="nav-pill">Marques</a>
+            <div class="nav-left">
+                <button class="menu-btn" id="openBtn" aria-label="Open Menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+                </button>
+                <a href="index.html" class="nav-pill">Accueil</a>
+                <a href="produit.html" class="nav-pill">Produits</a>
+                <a href="conseils.html" class="nav-pill active">Conseils</a>
+                <a href="marques.html" class="nav-pill">Marques</a>
+            </div>
 
-          </div>
+            <div class="nav-center">
+                <span class="logo-sub">L'Atelier</span>
+                <span class="logo-signature">Botanique de</span>
+                <a href="#" class="logo-main">Skinora</a>
+            </div>
 
-          <div class="nav-center">
-            <span class="logo-sub">L'Atelier</span>
-            <span class="logo-signature">Botanique de</span>
-            <a href="#" class="logo-main">Skinora</a>
-          </div>
-
-          <div class="nav-right">
-            <button class="icon-btn" aria-label="Search">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            </button>
-            <button class="icon-btn" aria-label="Cart">
-             <a href="panier.html" style="color: #111;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
-             </a>
-            </button>
-            <button class="icon-btn" aria-label="Account">
-             <a href="inscription.html" style="color: #111;">
-             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-             </a>
-
-            </button>
-          </div>
+            <div class="nav-right">
+                <button class="icon-btn" aria-label="Search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </button>
+                <button class="icon-btn" aria-label="Cart">
+                    <a href="panier.html" style="color: #111;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                    </a>
+                </button>
+                <button class="icon-btn" aria-label="Account">
+                    <a href="inscription.html" style="color: #111;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </a>
+                </button>
+            </div>
         </nav>
     </header>
 
@@ -798,7 +839,6 @@
 
     </main>
 
-  
     <footer class="capsule-footer">
       <div class="footer-top-block">
         <div class="footer-brand">skinora</div>
@@ -844,7 +884,6 @@
       </div>
     </footer>
 
-  
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const openBtn = document.getElementById('openBtn');
