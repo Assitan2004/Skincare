@@ -25,7 +25,8 @@ Le projet est structuré de manière claire et modulaire pour séparer les vues 
 * Bannière d'impact épurée mettant en valeur la philosophie de l'Atelier Botanique.
 * Barre de navigation (Navbar) adaptative et entièrement responsive : les menus basculent de manière fluide vers un tiroir ou une carte flottante selon la taille de l'écran pour une ergonomie mobile parfaite.
 * Point d'accès vers un diagnostic personnalisé et intégration d'un assistant virtuel interactif (Chatbot) flottant pour guider l'utilisateur.
-<img src="https://github.com/user-attachments/assets/4475ffa9-e4b3-470b-9126-ddb829a4a199" width="600" alt="Page d'accueil - Oréane" />
+
+<img width="2666" height="10714" alt="_C__Users_toure_skincare_accueil html" src="https://github.com/user-attachments/assets/6d1f9898-2478-4cf0-b534-ba492055622c" />
 
 
 
