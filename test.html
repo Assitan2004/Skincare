@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transform Your Business with AI-Powered Solutions</title>
+    <style>
+        /* --- DESIGN ACCENTUÉ SOMBRE (Fidèle à l'image) --- */
+        :root {
+            --background: #03000a; /* Fond noir très profond */
+            --foreground: #f8fafc; /* Texte blanc/brillant */
+            --muted-foreground: #94a3b8; /* Texte secondaire gris atténué */
+            --border: rgba(255, 255, 255, 0.08); /* Bordures discrètes */
+            --radius: 8px;
+            
+            /* Couleurs exactes des halos lumineux violets en arrière-plan */
+            --gradient-glow-1: rgba(112, 41, 179, 0.25); 
+            --gradient-glow-2: rgba(43, 16, 84, 0.4);   
+        }
+
+        /* --- STYLES DE BASE --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+
+        /* --- CONTENEUR HERO AVEC EFFET LUMINEUX AMBIANT (BLUR GLOW) --- */
+        .hero-container {
+            position: relative;
+            min-height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Halos lumineux floutés imitant la maquette */
+        .blur-gradient {
+            position: absolute;
+            inset: 0;
+            z-index: -10;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .glow-ball-left {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--gradient-glow-1) 0%, transparent 70%);
+            top: -10%;
+            left: -10%;
+            filter: blur(80px);
+        }
+
+        .glow-ball-right {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--gradient-glow-2) 0%, transparent 70%);
+            bottom: -5%;
+            right: -5%;
+            filter: blur(100px);
+        }
+
+        /* --- BARRE DE NAVIGATION APPLATIE --- */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 40;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Menu déroulant "Demo" à gauche */
+        .demo-dropdown {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            cursor: pointer;
+        }
+
+        /* Liens du centre */
+        .desktop-nav {
+            display: none;
+            gap: 2rem;
+        }
+
+        .desktop-nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #cbd5e1;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--foreground);
+        }
+
+        /* Bouton de connexion à droite */
+        .login-desktop {
+            display: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .login-desktop a:hover {
+            opacity: 0.8;
+        }
+
+        /* Menu mobile (Burger) */
+        .mobile-menu-toggle {
+            display: block;
+            background: none;
+            border: none;
+            color: var(--muted-foreground);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .desktop-nav { display: flex; }
+            .login-desktop { display: flex; }
+            .mobile-menu-toggle { display: none; }
+        }
+
+        /* --- TIROIR MOBILE MODALE --- */
+        .mobile-menu-wrapper {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        .mobile-menu-panel {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            max-width: 300px;
+            background-color: #090514;
+            padding: 2rem;
+            border-left: 1px solid var(--border);
+            transform: translateX(100%);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .mobile-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .mobile-links a {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* --- ZONE CONTENU (TEXTES IMMENSES) --- */
+        .hero-content {
+            position: relative;
+            padding: 7rem 1.5rem 2rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* Flèches de navigation latérales (carrousel) */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--muted-foreground);
+            transition: background 0.2s;
+        }
+        .nav-arrow:hover { background: rgba(255, 255, 255, 0.08); color: var(--foreground); }
+        .arrow-left { left: 2rem; }
+        .arrow-right { right: 2rem; }
+
+        @media (max-width: 768px) { .nav-arrow { display: none; } }
+
+        /* Pilule d'annonce centrale */
+        .announcement-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .announcement-banner {
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.4rem 1.2rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.02em;
+        }
+
+        .announcement-banner a {
+            font-weight: 600;
+            color: #fff;
+            margin-left: 0.25rem;
+        }
+
+        /* H1 ultra large et dense */
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.08;
+            color: #ffffff;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) { .hero-title { font-size: 4.2rem; } }
+        @media (min-width: 1100px) { .hero-title { font-size: 5.2rem; } }
+
+        /* Descriptif gris discret */
+        .hero-description {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--muted-foreground);
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 768px) { .hero-description { font-size: 1.3rem; } }
+
+        /* Groupe de boutons d'action */
+        .cta-group {
+            margin-top: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+        }
+
+        .btn-primary:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btn-secondary {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .btn-secondary:hover {
+            color: var(--muted-foreground);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-container">
+        
+        <div class="blur-gradient" aria-hidden="true">
+            <div class="glow-ball-left"></div>
+            <div class="glow-ball-right"></div>
+        </div>
+
+        <header>
+            <nav>
+                <div class="demo-dropdown">
+                    <span>Demo</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+                
+                <button id="open-menu-btn" class="mobile-menu-toggle" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
+                </button>
+                
+                <div class="desktop-nav">
+                    <a href="#solutions">Solutions</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#resources">Resources</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <div class="login-desktop">
+                    <a href="#signin">Sign In &rarr;</a>
+                </div>
+            </nav>
+            
+            <div id="mobile-menu-wrapper" class="mobile-menu-wrapper">
+                <div id="menu-overlay" class="mobile-menu-overlay"></div>
+                <div id="mobile-menu-panel" class="mobile-menu-panel">
+                    <button id="close-menu-btn" class="mobile-menu-toggle" type="button" style="float: right;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                    </button>
+                    <div class="mobile-links">
+                        <a href="#solutions">Solutions</a>
+                        <a href="#pricing">Pricing</a>
+                        <a href="#resources">Resources</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                        <a href="#signin" style="margin-top: 2rem; color: #a78bfa;">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="nav-arrow arrow-left">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </div>
+        <div class="nav-arrow arrow-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+
+        <main class="hero-content">
+            
+            <div class="announcement-container">
+                <div class="announcement-banner">
+                    🔮 New feature release! <a href="#assistant">Check out our AI Assistant &rarr;</a>
+                </div>
+            </div>
+            
+            <h1 class="hero-title">
+                Transform Your Business with AI-Powered Solutions
+            </h1>
+            <p class="hero-description">
+                Revolutionize your workflow with our cutting-edge artificial intelligence platform
+            </p>
+            
+            <div class="cta-group">
+                <a href="#signup" class="btn-primary">Start Free Trial</a>
+                <a href="#demo" class="btn-secondary">Watch Demo &rarr;</a>
+            </div>
+            
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openBtn = document.getElementById('open-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+            const wrapper = document.getElementById('mobile-menu-wrapper');
+            const panel = document.getElementById('mobile-menu-panel');
+            const overlay = document.getElementById('menu-overlay');
+
+            const openMenu = () => {
+                wrapper.style.display = 'block';
+                setTimeout(() => panel.style.transform = 'translateX(0)', 10);
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMenu = () => {
+                panel.style.transform = 'translateX(100%)';
+                setTimeout(() => wrapper.style.display = 'none', 200);
+                document.body.style.overflow = '';
+            };
+
+            openBtn.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            overlay.addEventListener('click', closeMenu);
+        });
+    </script>
+</body>
+</html>

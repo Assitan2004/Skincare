@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oréane – Elevate Your Skincare Routine</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
-
-  <style>
-    /* ── RESET & VARIABLES BENTO/GLASS ── */
+ /* ── RESET & VARIABLES BENTO/GLASS ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
     :root {
@@ -240,6 +228,7 @@
       transform: translateY(-10px) scale(0.95);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    /* Activation calquée sur le système fluide de ta page Conseils */
     .mobile-drawer.active {
       opacity: 1;
       visibility: visible;
@@ -527,44 +516,124 @@
     .m-tall { grid-row: span 2; aspect-ratio: 3/5; }
     .m-square { aspect-ratio: 1/1; }
 
-    /* ── STRUCTURE SECURISEE & NETTOYEE DU FOOTER CAPSULE ── */
-    .capsule-footer { 
-      background: var(--light-gray-bg); 
-      padding: 80px 32px 40px; 
-      display: flex; 
-      flex-direction: column; 
-      gap: 60px; 
-      width: 100%;
-    }
-    .footer-inner-wrapper {
-      max-width: 1300px;
-      margin: 0 auto;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 60px;
-    }
-    .footer-top-block { display: flex; justify-content: space-between; align-items: flex-start; }
-    .footer-brand { font-family: var(--font-body); font-size: 24px; font-weight: 500; letter-spacing: -0.02em; color: var(--charcoal); }
-    .footer-statement h2 { font-size: 36px; font-weight: 400; line-height: 1.2; max-width: 500px; letter-spacing: -0.01em; color: var(--charcoal); }
-    .footer-links-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-top: 1px solid #e5e5e7; padding-top: 40px; }
-    .footer-social-column { display: flex; gap: 16px; align-items: flex-end; }
-    .footer-social-column a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
-    .footer-social-column a:hover { color: var(--charcoal); }
-    .footer-column h5 { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 20px; }
-    .footer-column ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .footer-column ul a { font-size: 13.5px; color: var(--charcoal); text-decoration: none; transition: var(--transition); }
-    .footer-column ul a:hover { color: var(--text-muted); }
+ /* ── CAPSULE FOOTER ADAPTÉ ── */
+        .capsule-footer {
+            background: var(--light-gray-bg);
+            padding: 60px 24px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
+        @media (min-width: 1024px) {
+            .capsule-footer {
+                padding: 80px 80px 40px;
+                gap: 60px;
+            }
+        }
+
+        .footer-top-block {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        @media (min-width: 768px) {
+            .footer-top-block { flex-direction: row; align-items: center; }
+        }
+
+        .footer-brand {
+            font-family: var(--font-body);
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .footer-statement h2 {
+            font-size: 26px;
+            font-weight: 400;
+            line-height: 1.2;
+            max-width: 500px;
+            letter-spacing: -0.01em;
+        }
+
+        @media (min-width: 768px) {
+            .footer-statement h2 { font-size: 36px; }
+        }
+
+        .footer-links-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            border-top: 1px solid #e5e5e7;
+            padding-top: 40px;
+        }
+
+        @media (min-width: 480px) {
+            .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-links-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        }
+
+        .footer-social-column {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            margin-top: 10px;
+        }
+
+        @media (min-width: 1024px) {
+            .footer-social-column { align-items: flex-end; margin-top: 0; }
+        }
+
+        .footer-social-column a {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-social-column a:hover { color: var(--charcoal); }
+
+        .footer-column h5 {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-column ul a {
+            font-size: 13.5px;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-column ul a:hover {
+            color: var(--text-muted);
+        }
     header.scrolled .icon-btn a { color: var(--charcoal) !important; }
 
-    /* ── RESPONSIVE DESIGN (GLOBAL & FOOTER UNIFIÉ) ── */
+    /* ── RESPONSIVE DESIGN ── */
     @media (max-width: 1100px) {
       .nav-left a { display: none; }
       nav { grid-template-columns: auto 1fr auto; }
       .editorial-grid { grid-template-columns: 1fr 1fr; }
       .editorial-col:last-child { grid-column: span 2; }
-      .footer-links-grid { grid-template-columns: 1fr 1fr 1fr; }
     }
 
     @media (max-width: 900px) {
@@ -572,8 +641,6 @@
       .main-content-white { padding: 80px 40px 40px; }
       .concern-card { flex: 0 0 calc(50% - 12px); }
       .instagram-mosaic { grid-template-columns: repeat(2, 1fr); }
-      .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
-      .capsule-footer { padding: 60px 24px 40px; }
       .mobile-drawer { left: 20px; right: 20px; width: auto; top: 85px; }
     }
 
@@ -607,338 +674,7 @@
       .instagram-mosaic { grid-template-columns: 1fr; }
       .m-tall { aspect-ratio: 1/1; grid-row: auto; }
       
-      /* Styles responsive du footer sur tous les modèles de pages */
-      .footer-top-block { flex-direction: column; gap: 20px; }
-      .footer-statement h2 { font-size: 28px; }
-      .footer-links-grid { grid-template-columns: 1fr; gap: 32px; }
+    
       .footer-social-column { align-items: flex-start; margin-top: 10px; }
+      .capsule-footer { padding: 60px 24px 40px; }
     }
-  </style>
-</head>
-<body>
-
-<div class="hero-container">
-  
-  <header id="mainHeader">
-    <nav>
-      <div class="nav-left">
-        <button class="menu-btn" id="menuBtn" aria-label="Open Menu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-        </button>
-        <a href="index.html" class="nav-pill active">Accueil</a>
-        <a href="produit.html" class="nav-pill">Produits</a>
-        <a href="conseils.html" class="nav-pill">Conseils</a>
-        <a href="marques.html" class="nav-pill">Marques</a>
-      </div>
-
-      <div class="nav-center">
-        <span class="logo-sub">L'Atelier</span>
-        <span class="logo-signature">Botanique de</span>
-        <a href="#" class="logo-main">Oréane</a>
-      </div>
-
-      <div class="nav-right">
-        <button class="icon-btn" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </button>
-        <a href="panier.html" style="text-decoration: none;">
-          <button class="icon-btn" aria-label="Cart">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-            </svg>
-            <span class="cart-badge"></span>
-          </button>
-        </a>
-        <a href="inscription.html" style="text-decoration: none;">
-          <button class="icon-btn" aria-label="Account">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </button>
-        </a>
-      </div>
-    </nav>
-    
-    <div class="mobile-drawer" id="mobileDrawer">
-      <div class="drawer-links">
-        <a href="index.html" class="active">Accueil</a>
-        <a href="produit.html">Produits</a>
-        <a href="conseils.html">Conseils</a>
-        <a href="marques.html">Marques</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="hero-content-area">
-    <h1>Transform Your Look with Expert Products at <span>Our Luxury Center</span></h1>
-    <p>Revitalize your skin and spirit with Oréane. Step into a world of clinical excellence and unlock your inner glow instantly.</p>
-  </div>
-
-</div>
-
-<main class="main-content-white">
-  <div class="inner-container">
-
-    <section class="editorial-beauty-section">
-      <div class="editorial-top-row">
-        <div class="editorial-title">
-          <h2>Your Beauty And Success <span>Start Here!</span></h2>
-        </div>
-        <button class="floating-about-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
-          About Us
-        </button>
-      </div>
-
-      <div class="editorial-grid">
-        <div class="editorial-col">
-          <img src="Images/visage2.jpg" alt="Revitalize Your Skin" style="margin-bottom: 24px;">
-          <p>Revitalize Your Skin and Spirit at Our Premier Botanical Beauty Center.</p>
-          <a href="#" class="pill-btn-outline">Read More ↗</a>
-        </div>
-        <div class="editorial-col">
-          <img src="Images/texture.jpg" alt="Cream Texture">
-        </div>
-        <div class="editorial-col">
-          <h4>Discover Your Beauty Potential</h4>
-          <img src="Images/salon.jpg" alt="Luxury Atelier">
-        </div>
-      </div>
-    </section>
-
-    <section class="concern-section">
-      <h2>Nos sélections par préoccupation</h2>
-      
-      <div class="concern-pills-container">
-        <div class="concern-row">
-          <a href="#" class="concern-pill active">Acné &amp; boutons</a>
-          <a href="#" class="concern-pill">Brillance &amp; pores visibles</a>
-          <a href="#" class="concern-pill">Cernes</a>
-          <a href="#" class="concern-pill">Déshydratation</a>
-          <a href="#" class="concern-pill">Éclat &amp; uniformité</a>
-          <a href="#" class="concern-pill">Peau fragilisée / sensible</a>
-        </div>
-      </div>
-
-      <div class="carousel-wrapper">
-        <button class="nav-arrow arrow-left" id="slideLeft" aria-label="Previous">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        
-        <div class="carousel-track-container" id="carouselContainer">
-          <div class="carousel-track">
-            
-            <div class="concern-card">
-              <div class="concern-img-box">
-                <button class="fav-btn" aria-label="Add to favorites">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                </button>
-                <img src="Images/B1.jpg" alt="Glow Serum">
-              </div>
-              <div class="concern-info-row">
-                <div class="concern-text-block">
-                  <div class="concern-title">Glow Serum</div>
-                  <div class="concern-price">$56.00</div>
-                </div>
-                <button class="action-circle-btn" aria-label="View product">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="concern-card">
-              <div class="concern-img-box">
-                <button class="fav-btn" aria-label="Add to favorites">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                </button>
-                <img src="Images/serumj3.jpg" alt="BB Cream">
-              </div>
-              <div class="concern-info-row">
-                <div class="concern-text-block">
-                  <div class="concern-title">BB Cream</div>
-                  <div class="concern-price">$56.00</div>
-                </div>
-                <button class="action-circle-btn" aria-label="View product">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="concern-card">
-              <div class="concern-img-box">
-                <button class="fav-btn" aria-label="Add to favorites">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                </button>
-                <img src="Images/Cor2.JPG" alt="Sun Cream">
-              </div>
-              <div class="concern-info-row">
-                <div class="concern-text-block">
-                  <div class="concern-title">Sun Cream</div>
-                  <div class="concern-price">$56.00</div>
-                </div>
-                <button class="action-circle-btn" aria-label="View product">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <button class="nav-arrow arrow-right" id="slideRight" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-    </section>
-
-    <section class="video-fullscreen-section" id="videoSection">
-      <video autoplay muted loop playsinline class="bg-video">
-        <source src="Images/video1.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas les vidéos HTML5.
-      </video>
-    </section>
-
-    <section class="brands-section" style="padding-top: 45px;">
-      <h2>Nos marques</h2>
-      <div class="brands-grid">
-        <img src="Images/logo_roche.jpg" alt="Abib">
-        <img src="Images/logo_commo.jpg" alt="Commonlabs">
-        <img src="Images/logo_cerave.jpg" alt="Etude">
-        <img src="Images/logo_beauty.jpg" alt="Beauty of Joseon">
-        <img src="Images/ordinary_logo.jpg" alt="Lashilé Beauty">
-        <img src="Images/svr_logo.jpg" alt="NHCO">
-        <img src="Images/logo_mela.jpg" alt="Dr.Melaxin">
-        <img src="Images/vichy_logo.jpg" alt="Biodance">
-        <img src="Images/ACM_logo.jpg" alt="ACM">
-      </div>
-    </section>
-
-    <section class="instagram-section">
-      <div class="instagram-header">
-        <h3>Follow us on Instagram</h3>
-        <a href="https://instagram.com" target="_blank" class="insta-handle-btn">
-          @oreane_cosmetics
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
-        </a>
-      </div>
-
-      <div class="instagram-mosaic">
-        <div class="mosaic-item m-tall"><img src="Images/visage1.jpg" alt="Skincare routine"></div>
-        <div class="mosaic-item m-tall"><img src="Images/visage2.jpg" alt="Model glow"></div>
-        <div class="mosaic-item m-square"><img src="Images/texture.jpg" alt="Product flatlay"></div>
-        <div class="mosaic-item m-tall"><img src="Images/serumj3.jpg" alt="Applying serum"></div>
-        <div class="mosaic-item m-square"><img src="Images/visage3.jpg" alt="Skincare bottles"></div>
-      </div>
-    </section>
-
-  </div>
-</main>
-
-<!-- SORTI DE CONTENEUR MAIN POUR S'ADAPTER DE LA MÊME MANIÈRE SUR TOUTES LES PAGES -->
-<footer class="capsule-footer">
-  <div class="footer-inner-wrapper">
-    <div class="footer-top-block">
-      <div class="footer-brand">Oréane</div>
-      <div class="footer-statement">
-        <h2>It's never too late to start taking care of yourself</h2>
-      </div>
-    </div>
-
-    <div class="footer-links-grid">
-      <div class="footer-social-column">
-        <a href="#">instagram</a>
-        <a href="#">pinterest</a>
-      </div>
-      
-      <div class="footer-column">
-        <h5>About</h5>
-        <ul>
-          <li><a href="#">Our Mission</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Rewards</a></li>
-          <li><a href="#">Blog</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h5>Info</h5>
-        <ul>
-          <li><a href="#">Search</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Sazzle</a></li>
-          <li><a href="#">Refunds</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h5>Other</h5>
-        <ul>
-          <li><a href="#">Shipping</a></li>
-          <li><a href="#">Privacy</a></li>
-          <li><a href="#">Terms of Policies</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // ── LOGIQUE DU CARROUSEL DE PRODUITS ──
-  const container = document.getElementById('carouselContainer');
-  document.getElementById('slideRight').addEventListener('click', () => {
-    container.scrollBy({ left: 320, behavior: 'smooth' });
-  });
-  document.getElementById('slideLeft').addEventListener('click', () => {
-    container.scrollBy({ left: -320, behavior: 'smooth' });
-  });
-
-  // ── LOGIQUE D'OUVERTURE DU MENU ──
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileDrawer = document.getElementById('mobileDrawer');
-    
-    if (menuBtn && mobileDrawer) {
-      menuBtn.onclick = (e) => {
-        e.stopPropagation();
-        mobileDrawer.classList.toggle('active');
-      };
-      
-      document.addEventListener('click', () => mobileDrawer.classList.remove('active'));
-    }
-  });
-
-  // ── EFFET DYNAMIQUE NAVBAR BLANCHE AU SCROLL & DISPARITION VIDÉO ──
-  const header = document.getElementById('mainHeader');
-  const videoSection = document.getElementById('videoSection');
-  const mobileDrawer = document.getElementById('mobileDrawer');
-  
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-
-  const observerOptions = {
-    root: null,
-    threshold: 0.35
-  };
-
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        header.classList.add('hidden-nav');
-        if (mobileDrawer) mobileDrawer.classList.remove('active');
-      } else {
-        header.classList.remove('hidden-nav');
-      }
-    });
-  }, observerOptions);
-
-  if (videoSection) {
-    videoObserver.observe(videoSection);
-  }
-</script>
-
-</body>
-</html>
