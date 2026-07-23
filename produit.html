@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
     <link rel="stylesheet" href="produit.css">
- 
 </head>
 <body>
 
@@ -39,21 +38,21 @@
                 <button class="icon-btn" aria-label="Search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 </button>
-                <button class="icon-btn" aria-label="Cart">
-                    <a href="panier.html" style="color: #111;">
+                <a href="panier.html" style="text-decoration: none;">
+                    <button class="icon-btn" aria-label="Cart">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
                         <span class="cart-badge"></span>
-                    </a>
-                </button>
-                <button class="icon-btn" aria-label="Account">
-                    <a href="inscription.html" style="color: #111;">
+                    </button>
+                </a>
+                <a href="inscription.html" style="text-decoration: none;">
+                    <button class="icon-btn" aria-label="Account">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    </a>
-                </button>
+                    </button>
+                </a>
             </div>
         </nav>
         
-        <!-- TIROIR NAVIGATION SIMPLIFIÉ FIABLE ET PARFAITEMENT CLIQUABLE -->
+        <!-- TIROIR NAVIGATION MOBILE -->
         <div class="mobile-drawer" id="mobileDrawer">
             <div class="drawer-links">
                 <a href="index.html">Accueil</a>
@@ -64,7 +63,7 @@
         </div>
     </header>
 
-    <!-- FOND SOMBRE DE SÉCURITÉ GÉRANT UNIQUEMENT LE PROFIL DES FILTRES MOBILES -->
+    <!-- FOND SOMBRE DES FILTRES MOBILES -->
     <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeAllDrawers()"></div>
     
     <!-- TIROIR DES FILTRES SUR MOBILE -->
@@ -229,113 +228,54 @@
         </main>
     </div>
 
-   <footer class="capsule-footer">
-      <div class="footer-top-block">
-        <div class="footer-brand">Oréane</div>
-        <div class="footer-statement">
-          <h2>It's never too late to start taking care of yourself</h2>
-        </div>
-      </div>
-
-      <div class="footer-links-grid">
-        <div class="footer-social-column">
-          <a href="#">instagram</a>
-          <a href="#">pinterest</a>
-        </div>
-        
-        <div class="footer-column">
-          <h5>About</h5>
-          <ul>
-            <li><a href="#">Our Mission</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Rewards</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
+    <footer class="capsule-footer">
+        <div class="footer-top-block">
+            <div class="footer-brand">Oréane</div>
+            <div class="footer-statement">
+                <h2>It's never too late to start taking care of yourself</h2>
+            </div>
         </div>
 
-        <div class="footer-column">
-          <h5>Info</h5>
-          <ul>
-            <li><a href="#">Search</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Sazzle</a></li>
-            <li><a href="#">Refunds</a></li>
-          </ul>
-        </div>
+        <div class="footer-links-grid">
+            <div class="footer-column">
+                <h5>Social</h5>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h5>About</h5>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Rewards</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
 
-        <div class="footer-column">
-          <h5>Other</h5>
-          <ul>
-            <li><a href="#">Shipping</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms of Policies</a></li>
-          </ul>
+            <div class="footer-column">
+                <h5>Info</h5>
+                <ul>
+                    <li><a href="#">Search</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Sazzle</a></li>
+                    <li><a href="#">Refunds</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h5>Other</h5>
+                <ul>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms of Policies</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
     </footer>
 
-    <script>
-        const API = "http://127.0.0.1:5000";
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const user = JSON.parse(localStorage.getItem("user"));
-            
-            // Logique interactive calquée sur la page Conseils pour l'ouverture du menu mobile
-            const menuBtn = document.getElementById('menuBtn');
-            const mobileDrawer = document.getElementById('mobileDrawer');
-            
-            if (menuBtn && mobileDrawer) {
-                menuBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    mobileDrawer.classList.toggle('active');
-                };
-                document.addEventListener('click', () => mobileDrawer.classList.remove('active'));
-            }
-        });
-
-        // Pilote le tiroir de filtres sur mobile indépendamment de la navigation globale
-        function toggleFiltersDrawer(open) {
-            const filtersDrawer = document.getElementById("mobileFiltersDrawer");
-            const backdrop = document.getElementById("drawerBackdrop");
-            if (open) {
-                filtersDrawer.classList.add("open");
-                backdrop.classList.add("open");
-                document.body.style.overflow = "hidden";
-            } else {
-                filtersDrawer.classList.remove("open");
-                backdrop.classList.remove("open");
-                document.body.style.overflow = "";
-            }
-        }
-
-        // Ferme uniquement les filtres ouverts au clic sur le fond flouté
-        function closeAllDrawers() {
-            toggleFiltersDrawer(false);
-        }
-
-        function ajouterAuPanier(id, nom, prix, image) {
-            let panier = JSON.parse(localStorage.getItem("panier") || "[]");
-            const index = panier.findIndex(item => item.id === id);
-                                                                        
-            if (index !== -1) {
-                panier[index].quantite += 1;
-            } else {
-                panier.push({ id, nom, prix, image, quantite: 1 });
-            }
-                                                                        
-            localStorage.setItem("panier", JSON.stringify(panier));
-                                                                        
-            const msg = document.createElement("div");
-            msg.textContent = `✅ ${nom} ajouté au panier !`;
-            msg.style.cssText = `
-                position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-                background: #111; color: white; padding: 14px 28px;
-                border-radius: 40px; font-weight: 400; font-size: 0.85rem;
-                z-index: 9999; box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            `;
-            document.body.appendChild(msg);
-            setTimeout(() => msg.remove(), 2500);
-        }
-    </script>
+    <script src="produit.js"></script>
 </body>
 </html>

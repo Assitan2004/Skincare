@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
-  
 </head>
 <body>
 
@@ -54,7 +53,7 @@
       </div>
     </nav>
     
-    <!-- TIROIR MENU MODÈLE PAGE CONSEILS (ZÉRO CONFLIT DE CLIC, SUPER FLUIDE) -->
+    <!-- TIROIR MENU MOBILE -->
     <div class="mobile-drawer" id="mobileDrawer">
       <div class="drawer-links">
         <a href="index.html" class="active">Accueil</a>
@@ -90,7 +89,13 @@
         <div class="editorial-col">
           <img src="Images/visage2.jpg" alt="Revitalize Your Skin" style="margin-bottom: 24px;">
           <p>Revitalize Your Skin and Spirit at Our Premier Botanical Beauty Center.</p>
-          <a href="#" class="pill-btn-outline">Read More ↗</a>
+          <a href="#" class="pill-btn-outline">
+            Read More 
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7,7 17,7 17,17"/>
+            </svg>
+          </a>
         </div>
         <div class="editorial-col">
           <img src="Images/texture.jpg" alt="Cream Texture">
@@ -270,68 +275,9 @@
           </ul>
         </div>
       </div>
-    </footer>  </div>
+    </footer>
+  </div>
 </main>
-
-<script>
-  // ── LOGIQUE DU CARROUSEL DE PRODUITS ──
-  const container = document.getElementById('carouselContainer');
-  document.getElementById('slideRight').addEventListener('click', () => {
-    container.scrollBy({ left: 320, behavior: 'smooth' });
-  });
-  document.getElementById('slideLeft').addEventListener('click', () => {
-    container.scrollBy({ left: -320, behavior: 'smooth' });
-  });
-
-  // ── LOGIQUE D'OUVERTURE ET CLIC UNIQUE DIRECT DEPUIS CONSEILS ──
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileDrawer = document.getElementById('mobileDrawer');
-    
-    if (menuBtn && mobileDrawer) {
-      menuBtn.onclick = (e) => {
-        e.stopPropagation();
-        mobileDrawer.classList.toggle('active');
-      };
-      
-      // Ferme la boîte en cliquant à côté
-      document.addEventListener('click', () => mobileDrawer.classList.remove('active'));
-    }
-  });
-
-  // ── EFFET DYNAMIQUE NAVBAR BLANCHE AU SCROLL & DISPARITION VIDÉO ──
-  const header = document.getElementById('mainHeader');
-  const videoSection = document.getElementById('videoSection');
-  const mobileDrawer = document.getElementById('mobileDrawer');
-  
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-
-  const observerOptions = {
-    root: null,
-    threshold: 0.35
-  };
-
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        header.classList.add('hidden-nav');
-        if (mobileDrawer) mobileDrawer.classList.remove('active');
-      } else {
-        header.classList.remove('hidden-nav');
-      }
-    });
-  }, observerOptions);
-
-  if (videoSection) {
-    videoObserver.observe(videoSection);
-  }
-</script>
-
+<script src="index.js"></script>
 </body>
 </html>
